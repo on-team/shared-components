@@ -6,11 +6,11 @@
   import DatePicker from './DatePicker.svelte'
   import Icon from './Icon.svelte'
   import Modal from './Modal.svelte'
-  import { DateString } from './utils'
 
   export let name: string = ''
   export let placeholder: string = ''
-  export let value: DateString | string | undefined = undefined
+  /** YYYY/MM/DD形式 */
+  export let value: string | undefined = undefined
   export let disabled = false
   /** 特定の日付を選択不能(disabled状態)にする述語。関数がtrueを返す日付のセルはdisabled状態になる */
   export let disable: ((date: Dayjs) => boolean) | undefined = undefined

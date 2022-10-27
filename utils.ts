@@ -1,5 +1,4 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
-import { Opaque } from 'type-fest'
 
 /**
  * いわゆるタグ付きユニオン型を定義するためのユーティリティ。
@@ -10,12 +9,6 @@ import { Opaque } from 'type-fest'
  * { type: 'Rect'; width: number; height: number } | { type: 'Circle'; radius: number }
  */
 export type DiscriminatedUnion<T, K extends keyof T = keyof T> = K extends K ? { type: K } & T[K] : never
-
-/**
- * 普通の string 型と区別するための型
- * 2021-09-08T09:01:00.122Z や 2021-09-08 など日付に関する文字列を受け取れる
- **/
-export type DateString = Opaque<string, 'DateString'>
 
 /** 与えられたURL（相対パス可）が別ドメインのものかどうかを判定する */
 export function isExternalUrl(url: string): boolean {

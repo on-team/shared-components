@@ -5,11 +5,11 @@
   import FarDatePicker from './FarDatePicker.svelte'
   import Icon from './Icon.svelte'
   import Modal from './Modal.svelte'
-  import { DateString } from './utils'
 
   export let name: string = ''
   export let placeholder: string = ''
-  export let value: DateString | string | undefined = undefined
+  /** YYYY/MM/DD形式 */
+  export let value: string | undefined = undefined
   export let disabled = false
   export let style: string | undefined = undefined
   /** Felteのerrorsオブジェクト。正しい型を書くのが難しい割にメリットが乏しいのでanyを使っている */
