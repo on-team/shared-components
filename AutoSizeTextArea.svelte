@@ -14,13 +14,19 @@
   export { klass as class }
 
   const ZERO_WIDTH_SPACE = '\u200b'
+
+  function onFocus(event: FocusEvent) {
+    if (event.target instanceof HTMLTextAreaElement) {
+      text = event.target.value
+    }
+  }
 </script>
 
 <div class="root {klass}" class:disabled {style} style:min-height={minHeight}>
   <div class="dummy" aria-hidden="true">
     {text ? text : placeholder}{ZERO_WIDTH_SPACE}
   </div>
-  <textarea class="text-area" bind:value={text} {name} {placeholder} {disabled} />
+  <textarea class="text-area" bind:value={text} {name} {placeholder} {disabled} on:focus={onFocus} />
 </div>
 
 {#if $errors?.[name]?.[0]}
