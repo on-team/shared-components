@@ -54,8 +54,7 @@
 
     &.disabled {
       cursor: default;
-
-      /* TODO: disabled状態でのテキスト色を設定する */
+      color: hsl(0 0% 70%);
     }
   }
 
@@ -83,12 +82,14 @@
     &:checked {
       @apply border-main;
       transition: all 0.1s ease-out;
+
+      .disabled & {
+        border-color: hsl(0 0% 70%);
+      }
     }
 
     .disabled & {
       cursor: default;
-
-      /* TODO: disabled状態での見た目を設定する */
     }
 
     &::before {
@@ -109,6 +110,10 @@
       height: var(--size);
 
       transition: all 0.1s ease-out;
+
+      .disabled & {
+        background-color: hsl(0 0% 70%);
+      }
     }
   }
 </style>
