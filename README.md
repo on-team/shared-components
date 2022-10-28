@@ -32,7 +32,6 @@ git submodule add git@github.com:on-team/shared-components.git web/src/component
 shared-componentsは下記のnpmパッケージに依存しています。
 shared-componentsを使うプロジェクト内にこれらがインストールされていなければ使えません。
 
-- felte
 - dayjs
 - focus-trap
 - body-scroll-lock
