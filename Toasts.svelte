@@ -16,7 +16,7 @@
           <Icon src={alertOutlineIcon} tint="white" size="1.6em" />
         {/if}
       </div>
-      <div class="py-2 px-4">
+      <div class="py-3 px-4">
         {toastModel.message}
       </div>
     </div>
