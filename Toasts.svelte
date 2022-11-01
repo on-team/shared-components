@@ -1,9 +1,9 @@
 <script lang="ts">
   import { fade } from 'svelte/transition'
-  import Icon from '~/components/shared/Icon.svelte'
-  import { toastModelsStore } from '~/components/toast'
   import alertOutlineIcon from './alert-outline.svg'
   import checkIcon from './check.svg'
+  import Icon from './Icon.svelte'
+  import { toastModelsStore } from './toast'
 </script>
 
 <div class="root">
