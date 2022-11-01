@@ -54,8 +54,7 @@
             <slot {open} {close} {toggle} />
           </div>
 
-          <Divider classes={{ hidden: !$$slots.footer }} />
-          <div class="p-2" class:hidden={!$$slots.footer}>
+          <div class="footer">
             <slot name="footer" />
           </div>
         </div>
@@ -90,5 +89,10 @@
 
     border-radius: 0.5rem;
     box-shadow: 0 3px 14px hsla(0, 0%, 0%, 20%);
+  }
+
+  .footer {
+    @apply p-2 empty:hidden;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.05);
   }
 </style>
