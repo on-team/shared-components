@@ -33,6 +33,7 @@ shared-componentsは下記のnpmパッケージに依存しています。
 shared-componentsを使うプロジェクト内にこれらがインストールされていなければ使えません。  
 
 - dayjs
+- lodash
 - focus-trap
 - body-scroll-lock
 - @roxi/routify

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import _ from 'lodash'
   import { Readable } from 'svelte/store'
   import CommonCss from './CommonCss.svelte'
 
@@ -13,6 +14,8 @@
   export let style: string | undefined = undefined
   let klass: string = ''
   export { klass as class }
+
+  $: errorMessage = _.get($errors, name, null)?.[0]
 </script>
 
 {#if type === 'email'}
@@ -109,9 +112,9 @@
   />
 {/if}
 
-{#if $errors?.[name]?.[0]}
+{#if errorMessage}
   <div class="text-sm text-attention mt-2">
-    {$errors[name][0]}
+    {errorMessage}
   </div>
 {/if}
 

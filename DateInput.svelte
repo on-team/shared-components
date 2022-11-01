@@ -1,5 +1,6 @@
 <script lang="ts">
   import dayjs, { Dayjs } from 'dayjs'
+  import _ from 'lodash'
   import { Readable } from 'svelte/store'
   import calendarIcon from './calendar.svg'
   import CommonCss from './CommonCss.svelte'
@@ -19,6 +20,8 @@
   export let style: string | undefined = undefined
   let klass: string = ''
   export { klass as class }
+
+  $: errorMessage = _.get($errors, name, null)?.[0]
 
   let isDatePickerOpened = false
   $: selectedDate = value !== undefined ? dayjs(value) : undefined
@@ -41,9 +44,9 @@
   <input class="hidden" {name} {placeholder} {value} {disabled} />
 </div>
 
-{#if $errors?.[name]?.[0]}
+{#if errorMessage}
   <div class="text-sm text-attention mt-2">
-    {$errors[name][0]}
+    {errorMessage}
   </div>
 {/if}
 

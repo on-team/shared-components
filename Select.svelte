@@ -1,4 +1,5 @@
 <script lang="ts">
+  import _ from 'lodash'
   import { Readable } from 'svelte/store'
   import chevronBottom from './chevron-bottom.svg'
   import CommonCss from './CommonCss.svelte'
@@ -21,6 +22,8 @@
   export let style: string | undefined = undefined
   let klass = ''
   export { klass as class }
+
+  $: errorMessage = _.get($errors, name, null)?.[0]
 
   function getText(value: string): string {
     return titles?.[value] ?? value
@@ -113,9 +116,9 @@
   </Portal>
 {/if}
 
-{#if $errors?.[name]?.[0]}
+{#if errorMessage}
   <div class="text-sm text-attention mt-2">
-    {$errors[name][0]}
+    {errorMessage}
   </div>
 {/if}
 
