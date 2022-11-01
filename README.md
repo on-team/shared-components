@@ -47,11 +47,10 @@ shared-componentsを使うプロジェクト内にこれらがインストール
 ソースコードを編集してshared-componentsリポジトリにコミット&プッシュするだけでは、  
 shared-componentsをsubmoduleとして使っているリポジトリは更新されません（過去のコミット時点を参照し続けます）。  
 
-最新版にアップデートするには、次にような感じでsubmodule用フォルダに移動してチェックアウトのコマンドを実行してください。  
+最新版にアップデートするには次のコマンドを実行してください。  
 
 ```bash
-cd web/src/components/shared/
-git pull origin master
+git submodule update --remote
 ```
 
 アップデートするタイミングの判断は、npmパッケージのアップデート時と同じ考え方で大丈夫です。  
