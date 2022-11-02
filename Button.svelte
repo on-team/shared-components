@@ -1,10 +1,10 @@
 <script lang="ts">
   import { goto } from '@roxi/routify'
+  import { isExternalUrl } from '~/utils/string'
   import CommonCss from './CommonCss.svelte'
   import Spinner from './Spinner.svelte'
-  import { isExternalUrl } from './utils'
 
-  export let color: 'primary' | 'achromatic' = 'primary'
+  export let color: 'primary' | 'achromatic' | 'attention' = 'primary'
   export let ghost: boolean = false
   export let fullWidth: boolean = false
   export let type: 'submit' | 'button' | 'reset' = 'button'
@@ -124,6 +124,26 @@
           color: hsl(0, 0%, 75%);
         }
       }
+
+      &[data-color='attention'] {
+        @apply bg-attention text-white;
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsl(349, 100%, 32%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(349, 100%, 30%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          background-color: hsl(349, 50%, 85%);
+        }
+      }
     }
 
     &.ghost {
@@ -163,6 +183,29 @@
 
         &:active {
           background-color: hsla(0, 0%, 50%, 20%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          border: none;
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+
+      &[data-color='attention'] {
+        @apply text-attention;
+        border: var(--attention_color) 1px solid;
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsla(0, 0%, 50%, 10%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(349, 100%, 98%);
           transition-duration: 0s;
         }
 
