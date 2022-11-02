@@ -130,7 +130,7 @@
 
         @media (hover: hover) {
           &:hover {
-            background-color: hsl(349, 100%, 32%);
+            background-color: hsl(349, 60%, 40%);
             transition-duration: 0s;
           }
         }
