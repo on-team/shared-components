@@ -20,7 +20,7 @@ URLはon-Line-Subscribeの[README](https://github.com/on-team/on-Line-Subscribe#
 追加したいプロジェクトのルートフォルダにて、次のような感じで`git submodule add`コマンドを実行してください。  
 
 ```bash
-git submodule add git@github.com:on-team/shared-components.git web/src/components/shared/
+git submodule add https://github.com/on-team/shared-components.git web/src/components/shared/
 ```
 
 なお`git clone`コマンドに`--recursive`オプションを付けないとsubmoduleのファイルは取得されませんが、  
