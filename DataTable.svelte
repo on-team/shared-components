@@ -1,8 +1,11 @@
 <script context="module" lang="ts">
-  export type Column = string | { id: string; title?: string; sortable?: boolean; width?: string }
+  export type Column =
+    | string
+    | { id: string; title?: string; sortable?: boolean; width?: string; align?: 'left' | 'center' | 'right' }
 </script>
 
 <script lang="ts">
+  import _ from 'lodash'
   import chevronLeftIcon from './chevron-left.svg'
   import chevronRightIcon from './chevron-right.svg'
   import CommonCss from './CommonCss.svelte'
@@ -12,6 +15,7 @@
   import pageFirstIcon from './page-first.svg'
   import pageLastIcon from './page-last.svg'
   import SortButton from './SortButton.svelte'
+  import { objectEntries } from './utils'
 
   // TODO: 細かい見た目（余白、色など）の調整を行う
   // TODO: slotのlet変数の型を処理系が認識できるようにする
@@ -129,6 +133,24 @@
     return column.width ?? 'auto'
   }
 
+  function getColumnAlign(column: Column, rows: readonly Row[]): 'left' | 'center' | 'right' {
+    if (typeof column !== 'string' && column.align) return column.align
+
+    const aligns = rows.map((row) => {
+      switch (typeof row[getColumnId(column)]) {
+        case 'bigint':
+        case 'number':
+          return 'right'
+        case 'boolean':
+          return 'center'
+        default:
+          return 'left'
+      }
+    })
+    const counts: Record<'left' | 'center' | 'right', number> = _.countBy(aligns) as any
+    return _.maxBy(objectEntries(counts), ([, value]) => value)?.[0] ?? 'left'
+  }
+
   function onClickSortButton(columnId: string) {
     if (sortingState?.columnId === columnId) {
       onChangeSortingState?.({ columnId, reversed: !sortingState.reversed })
@@ -192,7 +214,7 @@
 
         {@const columnId = getColumnId(column)}
         {@const columnTitle = getColumnTitle(column)}
-        <div class="cell" data-column-id={columnId}>
+        <div class="cell" data-column-id={columnId} data-align={getColumnAlign(column, currentPageRows)}>
           <slot name="header-cell" {columnId} {columnTitle} {columnIndex}>
             {columnTitle}
           </slot>
@@ -228,7 +250,7 @@
 
           {@const columnId = getColumnId(column)}
           {@const value = row[columnId]}
-          <div class="cell" data-column-id={columnId}>
+          <div class="cell" data-column-id={columnId} data-align={getColumnAlign(column, currentPageRows)}>
             <slot name="cell" {row} {columnId} {value} {rowIndex} {columnIndex}>
               <DataTableCell {value} />
             </slot>
@@ -300,6 +322,14 @@
 
     .header-row & {
       font-weight: bold;
+    }
+
+    &[data-align='center'] {
+      justify-content: center;
+    }
+
+    &[data-align='right'] {
+      justify-content: end;
     }
 
     @media (hover: hover) {

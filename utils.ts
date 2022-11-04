@@ -48,6 +48,11 @@ export function objectFromEntries<K extends string, T>(entries: Iterable<readonl
   return Object.fromEntries(entries) as Record<K, T>
 }
 
+/** Object.entriesの型を改善しただけの関数 */
+export function objectEntries<K extends string, T>(value: Record<K, T>): readonly [K, T][] {
+  return Object.entries(value) as any
+}
+
 export function lockBodyScroll(element: HTMLElement) {
   disableBodyScroll(element)
 
