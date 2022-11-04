@@ -39,10 +39,25 @@
     }
   }
 
-  function onClickBackdrop(event: MouseEvent) {
+  function onOperateBackdrop(event: Event) {
     if (event.target !== event.currentTarget) return
 
     dropdownInfo = undefined
+  }
+
+  // なぜかon:mousewheelの型定義がなく、@ts-ignoreも使えないのでリスナーを手動で登録する
+  function setupBackdrop(element: HTMLElement) {
+    element.addEventListener('click', onOperateBackdrop)
+    element.addEventListener('mousewheel', onOperateBackdrop)
+    element.addEventListener('touchmove', onOperateBackdrop)
+
+    return {
+      destroy() {
+        element.removeEventListener('click', onOperateBackdrop)
+        element.removeEventListener('mousewheel', onOperateBackdrop)
+        element.removeEventListener('touchmove', onOperateBackdrop)
+      },
+    }
   }
 
   $: primarySelectedValue = (() => {
@@ -97,7 +112,7 @@
 </button>
 {#if dropdownInfo}
   <Portal>
-    <div class="backdrop" on:click={onClickBackdrop}>
+    <div class="backdrop" use:setupBackdrop>
       <div
         class="dropdown"
         style:--dropdown-left={`${dropdownInfo.leftPx}px`}
