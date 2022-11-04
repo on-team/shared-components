@@ -9,8 +9,8 @@ gitのsubmodule機能を使って共有します。
 ## カタログページについて
 
 コンポーネントの見た目や使い方を確認するためのウェブページが用意されています。  
-https://dev.d1xcmdmxxsl4x4.amplifyapp.com/catalog  
-このページ群はon-Line-Subscribeリポジトリに内蔵されています（専用の環境を立ち上げる手間を省略するため）。  
+専用の環境を新たに構築する手間を省略するために、そのウェブページはon-Line-Subscribeリポジトリに内蔵されています。  
+URLはon-Line-Subscribeの[README](https://github.com/on-team/on-Line-Subscribe#readme)に載っています。  
 
 *コンポーネント本体を更新したらカタログページも更新してください。*  
 例えば新しいPropsを追加した場合、そのPropsを使うサンプルを掲載してください。  
