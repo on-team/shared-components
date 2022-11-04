@@ -1,8 +1,8 @@
 <script lang="ts">
   import { goto } from '@roxi/routify'
-  import { isExternalUrl } from '~/utils/string'
   import CommonCss from './CommonCss.svelte'
   import Spinner from './Spinner.svelte'
+  import { isExternalUrl } from './utils'
 
   export let color: 'primary' | 'achromatic' | 'attention' = 'primary'
   export let ghost: boolean = false
