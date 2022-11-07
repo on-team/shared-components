@@ -36,7 +36,9 @@
     }
   }
 
-  function onClickBackdrop() {
+  function onOperateBackdrop(event: Event) {
+    if (event.target !== event.currentTarget) return
+
     if (!persistent) {
       close()
     }
@@ -118,6 +120,21 @@
     const mapping = { top: '0%', center: '50%', bottom: '100%' } as const
     return mapping[toVerticalPosition(position)]
   }
+
+  // なぜかon:mousewheelの型定義がなく、@ts-ignoreも使えないのでリスナーを手動で登録する
+  function setupBackdrop(element: HTMLElement) {
+    element.addEventListener('click', onOperateBackdrop)
+    element.addEventListener('mousewheel', onOperateBackdrop)
+    element.addEventListener('touchmove', onOperateBackdrop)
+
+    return {
+      destroy() {
+        element.removeEventListener('click', onOperateBackdrop)
+        element.removeEventListener('mousewheel', onOperateBackdrop)
+        element.removeEventListener('touchmove', onOperateBackdrop)
+      },
+    }
+  }
 </script>
 
 <div class:w-max={!fullWidthLauncher} bind:this={launcher}>
@@ -135,7 +152,7 @@
       data-horizontal-position={toHorizontalPosition(on)}
       data-vertical-position={toVerticalPosition(on)}
       transition:fade={{ duration: 150 }}
-      on:click|self={onClickBackdrop}
+      use:setupBackdrop
       {...$$restProps}
     >
       <slot name="frame" {open} {close} {toggle}>
