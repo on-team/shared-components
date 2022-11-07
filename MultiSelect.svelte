@@ -12,6 +12,7 @@
   export let titles: Partial<Record<string, string>> = {}
   export let selected: Partial<Record<T, boolean>> = objectFromEntries(values.map((value) => [value, false]))
   export let placeholder: string = ''
+  export let name: string | undefined = undefined
   export let disabled: boolean = false
   export let fullWidth = false
   export let style: string | undefined = undefined
@@ -125,7 +126,7 @@
           {#if i > 0}
             <Divider />
           {/if}
-          <Checkbox class="px-4 py-3" fullWidth bind:checked={selected[value]}>
+          <Checkbox class="px-4 py-3" name={`${name}.${value}`} fullWidth bind:checked={selected[value]}>
             {getText(value)}
           </Checkbox>
         {/each}
