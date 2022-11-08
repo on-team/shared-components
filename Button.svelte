@@ -126,7 +126,8 @@
       }
 
       &[data-color='attention'] {
-        @apply bg-attention text-white;
+        @apply text-white;
+        background-color: var(--attention_color);
 
         @media (hover: hover) {
           &:hover {
