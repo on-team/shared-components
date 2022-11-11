@@ -20,6 +20,7 @@
   .root {
     transform-origin: center;
     transition: all 140ms ease-out;
+    transform: rotate(0deg);
     color: hsl(0 0% 50%);
 
     &.reversed {
