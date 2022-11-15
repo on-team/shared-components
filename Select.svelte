@@ -2,9 +2,11 @@
   import _ from 'lodash'
   import { Readable } from 'svelte/store'
   import chevronBottom from './chevron-bottom.svg'
+  import closeIcon from './close.svg'
   import CommonCss from './CommonCss.svelte'
   import Divider from './Divider.svelte'
   import Icon from './Icon.svelte'
+  import IconButton from './IconButton.svelte'
   import Portal from './Portal.svelte'
   import { lockBodyScroll } from './utils'
 
@@ -18,7 +20,8 @@
   export let errors: Readable<any> | undefined = undefined
   export let disabled: boolean = false
   export let fullWidth = false
-  export let onChangeSelected: ((selected: T) => void) | undefined = undefined
+  export let withClearButton = false
+  export let onChangeSelected: ((selected: T | undefined) => void) | undefined = undefined
   export let style: string | undefined = undefined
   let klass = ''
   export { klass as class }
@@ -29,7 +32,7 @@
     return titles?.[value] ?? value
   }
 
-  function changeSelected(newSelected: T) {
+  function changeSelected(newSelected: T | undefined) {
     selected = newSelected
     onChangeSelected?.(newSelected)
   }
@@ -38,6 +41,8 @@
   let dropdownInfo: DropdownInfo | undefined = undefined
 
   function onClickLauncher(event: MouseEvent) {
+    if (event.defaultPrevented) return
+
     if (event.currentTarget instanceof HTMLElement) {
       const rect = event.currentTarget.getBoundingClientRect()
       dropdownInfo = {
@@ -84,14 +89,34 @@
 >
   <div class="preview-area">
     {#if selected != null}
-      <div class="preview">{getText(selected)}</div>
+      <div class="preview">
+        {getText(selected)}
+        {#if withClearButton && !disabled}
+          <IconButton
+            class="ml-1"
+            src={closeIcon}
+            size="1.6em"
+            iconSize="70%"
+            onClick={() => changeSelected(undefined)}
+          />
+        {:else}
+          <div class="w-4" />
+        {/if}
+      </div>
     {/if}
     <div class="text-text-lightGray" class:render-only-width={selected != null}>
       {placeholder}
     </div>
     <div class="render-only-width">
       {#each values as value}
-        <div class="preview">{getText(value)}</div>
+        <div class="preview">
+          {getText(value)}
+          {#if withClearButton && !disabled}
+            <IconButton class="ml-1" src={closeIcon} size="1.6em" iconSize="70%" />
+          {:else}
+            <div class="w-4" />
+          {/if}
+        </div>
       {/each}
     </div>
     <input type="hidden" {name} value={selected ?? null} />
@@ -151,7 +176,7 @@
     border: var(--tt_color_light-gray) 1px solid;
     padding: 0.4em 0.7em;
     box-sizing: border-box;
-    height: var(--one-line-input-height);
+    min-height: var(--one-line-input-height);
 
     background-color: white;
     font: inherit;
@@ -172,6 +197,10 @@
     }
   }
 
+  .preview {
+    @apply flex items-center justify-between;
+  }
+
   .render-only-width {
     visibility: hidden;
     height: 0;
@@ -182,8 +211,6 @@
     transform-origin: center;
     transition: all 140ms ease-out;
     transform: rotate(0deg);
-
-    margin-left: 0.5em;
 
     .opened & {
       transform: rotate(-180deg);
