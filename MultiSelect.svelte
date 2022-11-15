@@ -149,7 +149,7 @@
     border: var(--tt_color_light-gray) 1px solid;
     padding: 0.4em 0.7em;
     box-sizing: border-box;
-    height: var(--one-line-input-height);
+    min-height: var(--one-line-input-height);
 
     background-color: white;
     font: inherit;

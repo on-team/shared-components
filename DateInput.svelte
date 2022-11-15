@@ -68,7 +68,7 @@
   .root {
     @apply w-full rounded-md grid items-center bg-white;
     grid-template-columns: 1fr auto;
-    height: var(--one-line-input-height);
+    min-height: var(--one-line-input-height);
     padding: 0 0.7em;
     border: var(--tt_color_light-gray) 1px solid;
     cursor: pointer;
