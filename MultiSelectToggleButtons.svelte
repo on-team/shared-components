@@ -13,9 +13,10 @@
 
 <div class={`root ${klass}`} {style} {...$$restProps}>
   {#each values as value (value)}
-    <button class:selected={selected[value]} type="button" on:click={() => (selected[value] = !selected[value])}>
+    <label class="button" class:selected={selected[value]}>
+      <input type="checkbox" class="checkbox" bind:checked={selected[value]} />
       {titles[value] ?? value}
-    </button>
+    </label>
   {/each}
 </div>
 
@@ -27,12 +28,17 @@
     grid-auto-columns: 1fr;
   }
 
-  button {
-    @apply h-9 rounded;
+  .button {
+    @apply flex items-center justify-center px-2 py-1 rounded;
+    min-height: var(--one-line-input-height);
     border: 1px solid var(--liff_line_color);
 
     &.selected {
       @apply border-none bg-text-gray text-white;
     }
+  }
+
+  .checkbox {
+    appearance: none;
   }
 </style>
