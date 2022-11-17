@@ -19,7 +19,16 @@
 </script>
 
 <label class="root {klass}" class:disabled class:full-width={fullWidth} style:--url={`url('${checkBoldIcon}')`}>
-  <input type="checkbox" class="checkbox" {style} {value} {name} {disabled} bind:checked />
+  <input
+    type="checkbox"
+    class="checkbox"
+    {style}
+    {value}
+    {name}
+    {disabled}
+    bind:checked
+    data-felte-keep-on-remove="true"
+  />
   <div>
     <slot />
   </div>
