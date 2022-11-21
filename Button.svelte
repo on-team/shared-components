@@ -23,7 +23,9 @@
   let isInProgress = false
 
   function clickHandler(event: MouseEvent) {
-    event.preventDefault()
+    // DataTableの行がrowHrefとボタンを両方持っている場合、ボタンへのclickイベントがa要素に伝わって画面遷移が起こってしまうのでその対策
+    if (onClick || href !== undefined) event.preventDefault()
+
     const promise = onClick?.(event)
     if (promise instanceof Promise) {
       isInProgress = true
