@@ -38,7 +38,7 @@
 </div>
 
 {#if errorMessage}
-  <div class="text-sm text-attention mt-2">
+  <div class="error-message">
     {errorMessage}
   </div>
 {/if}
@@ -118,5 +118,10 @@
         background-color: hsl(0 0% 70%);
       }
     }
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>

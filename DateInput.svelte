@@ -53,7 +53,7 @@
 </div>
 
 {#if errorMessage}
-  <div class="text-sm text-attention mt-2">
+  <div class="error-message">
     {errorMessage}
   </div>
 {/if}
@@ -82,5 +82,10 @@
   .preview {
     @apply flex items-center justify-between;
     grid-template-columns: 1fr auto;
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>

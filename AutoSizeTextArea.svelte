@@ -33,7 +33,7 @@
 </div>
 
 {#if errorMessage}
-  <div class="text-sm text-attention mt-2">
+  <div class="error-message">
     {errorMessage}
   </div>
 {/if}
@@ -88,5 +88,10 @@
 
   .text-area:focus {
     @apply border-main outline-none;
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>
