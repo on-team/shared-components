@@ -34,7 +34,8 @@
     border: 1px solid var(--liff_line_color);
 
     &.selected {
-      @apply border-none bg-text-gray text-white;
+      @apply border-none text-white;
+      background-color: var(--tt_color_gray);
     }
   }
 
