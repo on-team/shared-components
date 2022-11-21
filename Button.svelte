@@ -195,8 +195,8 @@
       }
 
       &[data-color='attention'] {
-        @apply text-attention;
         border: var(--attention_color) 1px solid;
+        color: var(--attention_color);
 
         @media (hover: hover) {
           &:hover {
