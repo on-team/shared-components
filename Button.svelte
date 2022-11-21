@@ -104,8 +104,8 @@
       }
 
       &[data-color='achromatic'] {
-        @apply text-text-gray;
         background-color: hsl(0, 0%, 93%);
+        color: var(--tt_color_gray);
 
         @media (hover: hover) {
           &:hover {
@@ -172,8 +172,8 @@
       }
 
       &[data-color='achromatic'] {
-        @apply text-text-gray;
         border: var(--tt_color_gray) 1px solid;
+        color: var(--tt_color_gray);
 
         @media (hover: hover) {
           &:hover {
@@ -195,8 +195,8 @@
       }
 
       &[data-color='attention'] {
-        @apply text-attention;
         border: var(--attention_color) 1px solid;
+        color: var(--attention_color);
 
         @media (hover: hover) {
           &:hover {

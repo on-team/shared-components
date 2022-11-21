@@ -48,12 +48,15 @@
   }
 
   .tab {
-    @apply px-[30px] h-10 rounded-t-lg flex items-center bg-bg-sub2 text-sm text-text-gray cursor-pointer;
+    @apply px-[30px] h-10 rounded-t-lg flex items-center text-sm cursor-pointer;
     border: 1px solid hsl(0, 0%, 90%);
     border-bottom: none;
+    background-color: var(--bg_color_sub2);
+    color: var(--tt_color_gray);
 
     &.selected {
-      @apply bg-white text-text-black font-bold border-none;
+      @apply bg-white font-bold border-none;
+      color: var(--tt_color_black);
     }
   }
 

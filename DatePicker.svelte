@@ -90,7 +90,8 @@
   }
 
   .year-month {
-    @apply text-text-black text-lg font-bold;
+    @apply text-lg font-bold;
+    color: var(--tt_color_black);
   }
 
   .grid {
@@ -145,7 +146,8 @@
       }
 
       &.selected {
-        @apply bg-main text-white;
+        @apply text-white;
+        background-color: var(--main_color);
       }
 
       &:disabled {

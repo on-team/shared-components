@@ -113,7 +113,7 @@
 {/if}
 
 {#if errorMessage}
-  <div class="text-sm text-attention mt-2">
+  <div class="error-message">
     {errorMessage}
   </div>
 {/if}
@@ -128,11 +128,17 @@
     border: var(--tt_color_light-gray) 1px solid;
 
     &:focus {
-      @apply border-main outline-none;
+      @apply outline-none;
+      border-color: var(--main_color);
     }
 
     &.disabled {
       background-color: hsla(0, 0%, 0%, 4%);
     }
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>

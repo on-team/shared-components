@@ -29,7 +29,7 @@
 <input type="hidden" {name} value={selected} />
 
 {#if errorMessage}
-  <div class="text-sm text-attention mt-2">
+  <div class="error-message">
     {errorMessage}
   </div>
 {/if}
@@ -47,7 +47,13 @@
     border: 1px solid var(--liff_line_color);
 
     &.selected {
-      @apply border-none bg-text-gray text-white;
+      @apply border-none text-white;
+      background-color: var(--tt_color_gray);
     }
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>

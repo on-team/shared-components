@@ -89,7 +89,7 @@
         {/if}
       </div>
     {/if}
-    <div class="text-text-lightGray" class:render-only-width={primarySelectedValue !== undefined}>
+    <div class="placeholder" class:render-only-width={primarySelectedValue !== undefined}>
       {placeholder}
     </div>
     <div class="render-only-width">
@@ -202,6 +202,10 @@
     .opened & {
       transform: rotate(-180deg);
     }
+  }
+
+  .placeholder {
+    color: var(--tt_color_light-gray);
   }
 
   .backdrop {

@@ -104,7 +104,7 @@
         {/if}
       </div>
     {/if}
-    <div class="text-text-lightGray" class:render-only-width={selected != null}>
+    <div class="placeholder" class:render-only-width={selected != null}>
       {placeholder}
     </div>
     <div class="render-only-width">
@@ -157,7 +157,7 @@
 {/if}
 
 {#if errorMessage}
-  <div class="text-sm text-attention mt-2">
+  <div class="error-message">
     {errorMessage}
   </div>
 {/if}
@@ -279,5 +279,10 @@
         background-color: hsl(187, 60%, 91%);
       }
     }
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>

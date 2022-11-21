@@ -60,26 +60,28 @@
     background-repeat: repeat-x;
 
     &.reached {
-      @apply bg-main;
       height: 3px;
+      background-color: var(--main_color);
     }
   }
 
   .circle {
-    @apply rounded-full bg-text-lightGray text-white flex items-center justify-center text-lg font-bold;
+    @apply rounded-full text-white flex items-center justify-center text-lg font-bold;
     width: var(--circle-size);
     height: var(--circle-size);
+    background-color: var(--tt_color_light-gray);
 
     &.reached {
-      @apply bg-main;
+      background-color: var(--main_color);
     }
   }
 
   .title {
-    @apply flex justify-center text-text-lightGray text-sm font-bold;
+    @apply flex justify-center text-sm font-bold;
+    color: var(--tt_color_light-gray);
 
     &.reached {
-      @apply text-main;
+      color: var(--main_color);
     }
   }
 </style>

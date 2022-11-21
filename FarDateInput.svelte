@@ -34,14 +34,14 @@
       <slot {value}>{value}</slot>
     </div>
   {:else}
-    <div class="text-text-lightGray">{placeholder}</div>
+    <div class="placeholder">{placeholder}</div>
   {/if}
   <Icon src={calendarIcon} size="1.1em" />
   <input class="hidden" {name} {placeholder} {value} {disabled} />
 </div>
 
 {#if errorMessage}
-  <div class="text-sm text-attention mt-2">
+  <div class="error-message">
     {errorMessage}
   </div>
 {/if}
@@ -62,5 +62,14 @@
       @apply cursor-default;
       background-color: hsla(0, 0%, 0%, 4%);
     }
+  }
+
+  .placeholder {
+    color: var(--tt_color_light-gray);
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>
