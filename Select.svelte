@@ -104,7 +104,7 @@
         {/if}
       </div>
     {/if}
-    <div class="text-text-lightGray" class:render-only-width={selected != null}>
+    <div class="placeholder" class:render-only-width={selected != null}>
       {placeholder}
     </div>
     <div class="render-only-width">

@@ -54,7 +54,8 @@
     color: var(--tt_color_gray);
 
     &.selected {
-      @apply bg-white text-text-black font-bold border-none;
+      @apply bg-white font-bold border-none;
+      color: var(--tt_color_black);
     }
   }
 

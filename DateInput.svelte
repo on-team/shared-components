@@ -46,7 +46,7 @@
       {/if}
     </div>
   {:else}
-    <div class="text-text-lightGray">{placeholder}</div>
+    <div class="placeholder">{placeholder}</div>
   {/if}
   <Icon src={calendarIcon} size="1em" tint="hsl(0, 0%, 35%)" />
   <input class="hidden" {name} {placeholder} {value} {disabled} />
@@ -82,6 +82,10 @@
   .preview {
     @apply flex items-center justify-between;
     grid-template-columns: 1fr auto;
+  }
+
+  .placeholder {
+    color: var(--tt_color_light-gray);
   }
 
   .error-message {

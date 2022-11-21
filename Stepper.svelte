@@ -66,9 +66,10 @@
   }
 
   .circle {
-    @apply rounded-full bg-text-lightGray text-white flex items-center justify-center text-lg font-bold;
+    @apply rounded-full text-white flex items-center justify-center text-lg font-bold;
     width: var(--circle-size);
     height: var(--circle-size);
+    background-color: var(--tt_color_light-gray);
 
     &.reached {
       background-color: var(--main_color);
@@ -76,7 +77,8 @@
   }
 
   .title {
-    @apply flex justify-center text-text-lightGray text-sm font-bold;
+    @apply flex justify-center text-sm font-bold;
+    color: var(--tt_color_light-gray);
 
     &.reached {
       color: var(--main_color);
