@@ -83,10 +83,8 @@
     transition: all 0.1s ease-out;
 
     &:checked {
-      @apply border-main;
       transition: all 0.1s ease-out;
-
-      .disabled & {
+      border-color: var(--main_color) .disabled & {
         border-color: hsl(0 0% 70%);
       }
     }
@@ -106,11 +104,11 @@
     }
 
     &:checked::before {
-      @apply bg-main;
-
       --size: 10px;
       width: var(--size);
       height: var(--size);
+
+      background-color: var(--main_color);
 
       transition: all 0.1s ease-out;
 

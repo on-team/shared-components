@@ -60,8 +60,8 @@
     background-repeat: repeat-x;
 
     &.reached {
-      @apply bg-main;
       height: 3px;
+      background-color: var(--main_color);
     }
   }
 
@@ -71,7 +71,7 @@
     height: var(--circle-size);
 
     &.reached {
-      @apply bg-main;
+      background-color: var(--main_color);
     }
   }
 
@@ -79,7 +79,7 @@
     @apply flex justify-center text-text-lightGray text-sm font-bold;
 
     &.reached {
-      @apply text-main;
+      color: var(--main_color);
     }
   }
 </style>

@@ -145,7 +145,8 @@
       }
 
       &.selected {
-        @apply bg-main text-white;
+        @apply text-white;
+        background-color: var(--main_color);
       }
 
       &:disabled {

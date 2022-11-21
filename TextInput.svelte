@@ -128,7 +128,8 @@
     border: var(--tt_color_light-gray) 1px solid;
 
     &:focus {
-      @apply border-main outline-none;
+      @apply outline-none;
+      border-color: var(--main_color);
     }
 
     &.disabled {
