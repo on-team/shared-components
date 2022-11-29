@@ -35,7 +35,16 @@
   }
 </script>
 
-<div class="root {klass}" class:disabled {style} on:click={() => disabled || (isDatePickerOpened = true)}>
+<div
+  class="root {klass}"
+  class:disabled
+  {style}
+  on:click={(event) => {
+    if (event.defaultPrevented || disabled) return
+
+    isDatePickerOpened = true
+  }}
+>
   {#if value}
     <div class="preview">
       <slot {value}>{value}</slot>
