@@ -84,7 +84,9 @@
 
     &:checked {
       transition: all 0.1s ease-out;
-      border-color: var(--main_color) .disabled & {
+      border-color: var(--main_color);
+
+      .disabled & {
         border-color: hsl(0 0% 70%);
       }
     }
