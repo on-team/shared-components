@@ -35,12 +35,13 @@
   }
 </script>
 
-<div
+<button
   class="root {klass}"
-  class:disabled
   {style}
+  type="button"
+  {disabled}
   on:click={(event) => {
-    if (event.defaultPrevented || disabled) return
+    if (event.defaultPrevented) return
 
     isDatePickerOpened = true
   }}
@@ -59,7 +60,7 @@
   {/if}
   <Icon src={calendarIcon} size="1em" tint="hsl(0, 0%, 35%)" />
   <input class="hidden" {name} {placeholder} {value} {disabled} />
-</div>
+</button>
 
 {#if errorMessage}
   <div class="error-message">
@@ -75,14 +76,14 @@
 
 <style lang="postcss">
   .root {
-    @apply w-full rounded-md grid items-center bg-white;
+    @apply w-full rounded-md grid items-center bg-white text-start;
     grid-template-columns: 1fr auto;
     min-height: var(--one-line-input-height);
     padding: 0 0.7em;
     border: var(--tt_color_light-gray) 1px solid;
     cursor: pointer;
 
-    &.disabled {
+    &:disabled {
       @apply cursor-default;
       background-color: hsla(0, 0%, 0%, 4%);
     }
