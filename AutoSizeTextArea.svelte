@@ -88,7 +88,7 @@
 
   .text-area:focus {
     @apply outline-none;
-    border-color: var(--main_color)
+    border-color: var(--main_color);
   }
 
   .error-message {
