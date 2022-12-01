@@ -2,6 +2,8 @@
   export type Column =
     | string
     | { id: string; title?: string; sortable?: boolean; width?: string; align?: 'left' | 'center' | 'right' }
+
+  export type SortingState = { columnId: string; reversed: boolean }
 </script>
 
 <script lang="ts">
@@ -51,8 +53,6 @@
 
   let klass = ''
   export { klass as class }
-
-  type SortingState = { columnId: string; reversed: boolean }
 
   /**
    * ページネーションをバックエンドで行う場合はtrue。
