@@ -217,6 +217,10 @@
     }
   }
 
+  .placeholder {
+    color: var(--tt_color_light-gray);
+  }
+
   .backdrop {
     position: fixed;
     top: 0;
