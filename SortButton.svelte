@@ -5,13 +5,14 @@
 
   export let sorted = false
   export let reversed = false
+  export let onClick: ((event: MouseEvent) => unknown) | undefined = undefined
   export let style: string | undefined = undefined
   let klass = ''
   export { klass as class }
 </script>
 
-<div class="root {klass}" class:sorted class:reversed {style} on:click>
-  <IconButton src={arrowDownIcon} size="1.5em" tint="currentColor" />
+<div class="root {klass}" class:sorted class:reversed {style}>
+  <IconButton src={arrowDownIcon} size="1.5em" tint="currentColor" {onClick} />
 </div>
 
 <CommonCss />

@@ -151,43 +151,43 @@
     return _.maxBy(objectEntries(counts), ([, value]) => value)?.[0] ?? 'left'
   }
 
-  function onClickSortButton(columnId: string) {
+  async function onClickSortButton(columnId: string) {
     if (sortingState?.columnId === columnId) {
-      onChangeSortingState?.({ columnId, reversed: !sortingState.reversed })
+      await onChangeSortingState?.({ columnId, reversed: !sortingState.reversed })
       if (!isBackendPagination) {
         sortingState.reversed = !sortingState.reversed
       }
     } else {
-      onChangeSortingState?.({ columnId, reversed: false })
+      await onChangeSortingState?.({ columnId, reversed: false })
       if (!isBackendPagination) {
         sortingState = { columnId, reversed: false }
       }
     }
   }
 
-  function toFirstPage() {
-    onChangeCurrentPageIndex?.(0)
+  async function toFirstPage() {
+    await onChangeCurrentPageIndex?.(0)
     if (!isBackendPagination) {
       currentPageIndex = 0
     }
   }
 
-  function toPrevPage() {
-    onChangeCurrentPageIndex?.(currentPageIndex - 1)
+  async function toPrevPage() {
+    await onChangeCurrentPageIndex?.(currentPageIndex - 1)
     if (!isBackendPagination) {
       currentPageIndex--
     }
   }
 
-  function toNextPage() {
-    onChangeCurrentPageIndex?.(currentPageIndex + 1)
+  async function toNextPage() {
+    await onChangeCurrentPageIndex?.(currentPageIndex + 1)
     if (!isBackendPagination) {
       currentPageIndex++
     }
   }
 
-  function toLastPage() {
-    onChangeCurrentPageIndex?.(lastPageIndex)
+  async function toLastPage() {
+    await onChangeCurrentPageIndex?.(lastPageIndex)
     if (!isBackendPagination) {
       currentPageIndex = lastPageIndex
     }
