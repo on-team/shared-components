@@ -5,7 +5,7 @@
   import { isExternalUrl } from './utils'
 
   export let color: 'primary' | 'achromatic' | 'attention' = 'primary'
-  export let ghost: boolean = false
+  export let variant: 'solid' | 'ghost' = 'solid'
   export let fullWidth: boolean = false
   export let type: 'submit' | 'button' | 'reset' = 'button'
   export let disabled: boolean = false
@@ -42,11 +42,11 @@
 
 <button
   class="root {klass}"
-  class:ghost
   class:fullWidth
   class:disabled
   {style}
   data-color={color}
+  data-variant={variant}
   {type}
   disabled={disabled || isInProgress}
   on:click={clickHandler}
@@ -81,7 +81,7 @@
       pointer-events: none;
     }
 
-    &:not(.ghost) {
+    &[data-variant='solid'] {
       &[data-color='primary'] {
         background-color: var(--main_color);
         color: white;
@@ -147,7 +147,7 @@
       }
     }
 
-    &.ghost {
+    &[data-variant='ghost'] {
       &[data-color='primary'] {
         border: var(--main_color) 1px solid;
         color: var(--main_color);

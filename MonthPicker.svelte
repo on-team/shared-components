@@ -16,7 +16,7 @@
 <div class="root {klass}" {style}>
   <slot {onSelect}>
     {#each range(1, 12) as month}
-      <Button color="achromatic" ghost onClick={() => onSelect?.(month)}>
+      <Button color="achromatic" variant="ghost" onClick={() => onSelect?.(month)}>
         <slot name="button-text" {month} {onSelect}>{month}月</slot>
       </Button>
     {/each}

@@ -46,7 +46,7 @@
       </div>
       <div class="button-list">
         {#each range(periodMinYear, periodMaxYear) as year}
-          <Button color="achromatic" ghost disabled={year < minYear} onClick={() => onSelect?.(year)}>
+          <Button color="achromatic" variant="ghost" disabled={year < minYear} onClick={() => onSelect?.(year)}>
             {String(year % 100).padStart(2, '0')}
           </Button>
         {/each}
