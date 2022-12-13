@@ -5,7 +5,7 @@
   import { isExternalUrl } from './utils'
 
   export let color: 'primary' | 'achromatic' | 'attention' = 'primary'
-  export let variant: 'solid' | 'ghost' = 'solid'
+  export let variant: 'solid' | 'ghost' | 'outline' = 'solid'
   export let fullWidth: boolean = false
   export let type: 'submit' | 'button' | 'reset' = 'button'
   export let disabled: boolean = false
@@ -207,6 +207,79 @@
 
         &:active {
           background-color: hsl(349, 100%, 98%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          border: none;
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+    }
+
+    &[data-variant='outline'] {
+      background-color: white;
+
+      &[data-color='primary'] {
+        border: var(--main_color) 1px solid;
+        color: var(--main_color);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsl(0, 0%, 97%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(0, 0%, 94%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          border: none;
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+
+      &[data-color='achromatic'] {
+        border: var(--tt_color_gray) 1px solid;
+        color: var(--tt_color_gray);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsl(0, 0%, 97%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(0, 0%, 94%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          border: none;
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+
+      &[data-color='attention'] {
+        border: var(--attention_color) 1px solid;
+        color: var(--attention_color);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsl(0, 0%, 97%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(0, 0%, 94%);
           transition-duration: 0s;
         }
 
