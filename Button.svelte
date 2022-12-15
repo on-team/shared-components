@@ -5,7 +5,7 @@
   import { isExternalUrl } from './utils'
 
   export let color: 'primary' | 'achromatic' | 'attention' = 'primary'
-  export let variant: 'solid' | 'ghost' | 'outline' = 'solid'
+  export let variant: 'solid' | 'ghost' | 'outline' | 'text' = 'solid'
   export let fullWidth: boolean = false
   export let type: 'submit' | 'button' | 'reset' = 'button'
   export let disabled: boolean = false
@@ -285,6 +285,71 @@
 
         &.disabled {
           border: none;
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+    }
+
+    &[data-variant='text'] {
+      &[data-color='primary'] {
+        color: var(--main_color);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsla(0, 0%, 50%, 10%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsla(0, 0%, 50%, 20%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+
+      &[data-color='achromatic'] {
+        color: var(--tt_color_gray);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsla(0, 0%, 50%, 10%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsla(0, 0%, 50%, 20%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+
+      &[data-color='attention'] {
+        color: var(--attention_color);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsla(0, 0%, 50%, 10%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(349, 100%, 98%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
           background-color: hsl(0, 0%, 96%);
           color: hsl(0, 0%, 75%);
         }
