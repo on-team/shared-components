@@ -59,7 +59,7 @@
     <div class="placeholder">{placeholder}</div>
   {/if}
   <Icon src={calendarIcon} size="1em" tint="hsl(0, 0%, 35%)" />
-  <input class="hidden" {name} {placeholder} {value} {disabled} />
+  <input class="hidden" {name} {placeholder} value={value ?? null} {disabled} />
 </button>
 
 {#if errorMessage}
