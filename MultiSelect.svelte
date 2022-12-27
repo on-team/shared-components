@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { createField } from 'felte'
+  import _ from 'lodash'
+  import { Readable } from 'svelte/store'
   import Checkbox from './Checkbox.svelte'
   import chevronBottom from './chevron-bottom.svg'
   import CommonCss from './CommonCss.svelte'
@@ -15,9 +18,16 @@
   export let name: string | undefined = undefined
   export let disabled: boolean = false
   export let fullWidth = false
+  /** Felteのerrorsオブジェクト。正しい型を書くのが難しい割にメリットが乏しいのでanyを使っている */
+  export let errors: Readable<any> | undefined = undefined
   export let style: string | undefined = undefined
   let klass = ''
   export { klass as class }
+
+  // エラーメッセージを適切なタイミングで表示させるために必要
+  const { field, onBlur } = createField(name)
+
+  $: errorMessage = _.get($errors, name, null)?.[0]
 
   function getText(value: string): string {
     return titles?.[value] ?? value
@@ -44,6 +54,7 @@
     if (event.target !== event.currentTarget) return
 
     dropdownInfo = undefined
+    onBlur()
   }
 
   // なぜかon:mousewheelの型定義がなく、@ts-ignoreも使えないのでリスナーを手動で登録する
@@ -78,6 +89,7 @@
   type="button"
   {disabled}
   on:click={onClickLauncher}
+  use:field
   {...$$restProps}
 >
   <div class="preview-area">
@@ -126,13 +138,19 @@
           {#if i > 0}
             <Divider />
           {/if}
-          <Checkbox class="px-4 py-3" name={`${name}.${value}`} fullWidth bind:checked={selected[value]}>
+          <Checkbox class="px-4 py-3" fullWidth bind:checked={selected[value]}>
             {getText(value)}
           </Checkbox>
         {/each}
       </div>
     </div>
   </Portal>
+{/if}
+
+{#if errorMessage}
+  <div class="error-message">
+    {errorMessage}
+  </div>
 {/if}
 
 <CommonCss />
@@ -259,5 +277,10 @@
         background-color: hsl(187, 60%, 91%);
       }
     }
+  }
+
+  .error-message {
+    @apply text-sm mt-2;
+    color: var(--attention_color);
   }
 </style>
