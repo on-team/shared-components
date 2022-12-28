@@ -4,15 +4,21 @@
   type T = $$Generic<string>
   export let tabIds: readonly T[]
   export let selected: T = tabIds[0]
+  export let onChangeCurrentTabId: ((tabId: T) => void) | undefined = undefined
 
   let klass = ''
   export { klass as class }
+
+  function onChangeTabId(tabId: T) {
+    onChangeCurrentTabId?.((selected = tabId))
+    selected = tabId
+  }
 </script>
 
 <div class={klass}>
   <div class="tab-bar">
     {#each tabIds as tabId}
-      <div class="tab" class:selected={tabId === selected} on:click={() => (selected = tabId)}>
+      <div class="tab" class:selected={tabId === selected} on:click={() => onChangeTabId(tabId)}>
         <slot name="title" {tabId} {selected}>{tabId}</slot>
       </div>
     {/each}
