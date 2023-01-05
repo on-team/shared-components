@@ -8,17 +8,19 @@
 
   let klass = ''
   export { klass as class }
-
-  function onChangeTabId(tabId: T) {
-    onChangeCurrentTabId?.((selected = tabId))
-    selected = tabId
-  }
 </script>
 
 <div class={klass}>
   <div class="tab-bar">
     {#each tabIds as tabId}
-      <div class="tab" class:selected={tabId === selected} on:click={() => onChangeTabId(tabId)}>
+      <div
+        class="tab"
+        class:selected={tabId === selected}
+        on:click={() => {
+          selected = tabId
+          onChangeCurrentTabId?.(selected)
+        }}
+      >
         <slot name="title" {tabId} {selected}>{tabId}</slot>
       </div>
     {/each}
