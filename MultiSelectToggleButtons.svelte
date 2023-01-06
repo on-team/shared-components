@@ -1,20 +1,34 @@
 <script lang="ts">
   import CommonCss from './CommonCss.svelte'
-  import { objectFromEntries } from './utils'
 
   type T = $$Generic<string>
   export let values: readonly T[]
   export let titles: Partial<Record<string, string>> = {}
-  export let selected: Partial<Record<T, boolean>> = objectFromEntries(values.map((value) => [value, false]))
+  export let selected: T[] | undefined = []
   export let style: string | undefined = undefined
   let klass = ''
   export { klass as class }
+
+  function onChange(event: Event, value: T) {
+    if (event.target instanceof HTMLInputElement) {
+      if (event.target.checked) {
+        selected = [...(selected ?? []), value]
+      } else {
+        selected = selected?.filter((x) => x !== value)
+      }
+    }
+  }
 </script>
 
 <div class={`root ${klass}`} {style} {...$$restProps}>
   {#each values as value (value)}
-    <label class="button" class:selected={selected[value]}>
-      <input type="checkbox" class="checkbox" bind:checked={selected[value]} />
+    <label class="button" class:selected={selected?.includes(value)}>
+      <input
+        type="checkbox"
+        class="checkbox"
+        checked={selected?.includes(value)}
+        on:change={(event) => onChange(event, value)}
+      />
       {titles[value] ?? value}
     </label>
   {/each}

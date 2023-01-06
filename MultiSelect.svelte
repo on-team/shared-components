@@ -8,12 +8,12 @@
   import Divider from './Divider.svelte'
   import Icon from './Icon.svelte'
   import Portal from './Portal.svelte'
-  import { lockBodyScroll, objectFromEntries } from './utils'
+  import { lockBodyScroll } from './utils'
 
   type T = $$Generic<string>
   export let values: readonly T[]
   export let titles: Partial<Record<string, string>> = {}
-  export let selected: Partial<Record<T, boolean>> = objectFromEntries(values.map((value) => [value, false]))
+  export let selected: T[] | undefined = []
   export let placeholder: string = ''
   export let name: string | undefined = undefined
   export let disabled: boolean = false
@@ -25,15 +25,13 @@
   export { klass as class }
 
   // エラーメッセージを適切なタイミングで表示させるために必要
-  const { field, onBlur } = createField(name)
+  const { field, onBlur } = name !== undefined ? createField(name) : { field: () => {}, onBlur: () => {} }
 
   $: errorMessage = _.get($errors, name, null)?.[0]
 
   function getText(value: string): string {
     return titles?.[value] ?? value
   }
-
-  $: followingCount = Object.entries(selected).filter(([, value]) => value).length - 1
 
   type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number }
   let dropdownInfo: DropdownInfo | undefined = undefined
@@ -71,13 +69,6 @@
       },
     }
   }
-
-  $: primarySelectedValue = (() => {
-    for (const key in selected) {
-      if (selected[key]) return key
-    }
-    return undefined
-  })()
 </script>
 
 <button
@@ -93,15 +84,15 @@
   {...$$restProps}
 >
   <div class="preview-area">
-    {#if primarySelectedValue !== undefined}
+    {#if selected?.[0] !== undefined}
       <div class="preview">
-        <div class="primary-selected-value">{getText(primarySelectedValue)}</div>
-        {#if followingCount > 0}
-          <div class="following-count">+{followingCount}</div>
+        <div class="primary-selected-value">{getText(selected[0])}</div>
+        {#if selected.length > 1}
+          <div class="following-count">+{selected.length - 1}</div>
         {/if}
       </div>
     {/if}
-    <div class="placeholder" class:render-only-width={primarySelectedValue !== undefined}>
+    <div class="placeholder" class:render-only-width={selected?.[0] !== undefined}>
       {placeholder}
     </div>
     <div class="render-only-width">
@@ -138,7 +129,18 @@
           {#if i > 0}
             <Divider />
           {/if}
-          <Checkbox class="px-4 py-3" fullWidth bind:checked={selected[value]}>
+          <Checkbox
+            class="px-4 py-3"
+            fullWidth
+            checked={selected?.includes(value)}
+            onChangeChecked={(checked) => {
+              if (checked) {
+                selected = [...(selected ?? []), value]
+              } else {
+                selected = selected?.filter((x) => x !== value)
+              }
+            }}
+          >
             {getText(value)}
           </Checkbox>
         {/each}

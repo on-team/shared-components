@@ -11,11 +11,18 @@
   export let fullWidth = false
   /** Felteのerrorsオブジェクト。正しい型を書くのが難しい割にメリットが乏しいのでanyを使っている */
   export let errors: Readable<any> | undefined = undefined
+  export let onChangeChecked: ((checked: boolean) => void) | undefined = undefined
   export let style: string | undefined = undefined
   let klass = ''
   export { klass as class }
 
   $: errorMessage = _.get($errors, name, null)?.[0]
+
+  function onChange(event: Event) {
+    if (event.target instanceof HTMLInputElement) {
+      onChangeChecked?.(event.target.checked)
+    }
+  }
 </script>
 
 <label class="root {klass}" class:disabled class:full-width={fullWidth} style:--url={`url('${checkBoldIcon}')`}>
@@ -28,6 +35,7 @@
     {disabled}
     bind:checked
     data-felte-keep-on-remove="true"
+    on:change={onChange}
   />
   <div>
     <slot />
