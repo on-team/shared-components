@@ -209,6 +209,7 @@
   }
 
   .icon {
+    @apply grid place-items-center;
     transform-origin: center;
     transition: all 140ms ease-out;
     transform: rotate(0deg);
