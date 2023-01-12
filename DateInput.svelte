@@ -3,7 +3,7 @@
   import _ from 'lodash'
   import { Readable } from 'svelte/store'
   import calendarIcon from './calendar.svg'
-  import closeIcon from './close.svg'
+  import closeCircleIcon from './close-circle.svg'
   import CommonCss from './CommonCss.svelte'
   import DatePicker from './DatePicker.svelte'
   import Icon from './Icon.svelte'
@@ -50,7 +50,14 @@
     <div class="preview">
       <slot {value}>{value}</slot>
       {#if withClearButton && !disabled}
-        <IconButton class="mx-1" src={closeIcon} size="1.6em" iconSize="70%" onClick={() => (value = undefined)} />
+        <IconButton
+          class="mx-1"
+          src={closeCircleIcon}
+          size="1.6em"
+          iconSize="80%"
+          tint="hsl(0 0% 80%)"
+          onClick={() => (value = undefined)}
+        />
       {:else}
         <div class="w-4" />
       {/if}

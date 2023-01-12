@@ -2,7 +2,7 @@
   import _ from 'lodash'
   import { Readable } from 'svelte/store'
   import chevronBottom from './chevron-bottom.svg'
-  import closeIcon from './close.svg'
+  import closeCircleIcon from './close-circle.svg'
   import CommonCss from './CommonCss.svelte'
   import Divider from './Divider.svelte'
   import Icon from './Icon.svelte'
@@ -94,9 +94,10 @@
         {#if withClearButton && !disabled}
           <IconButton
             class="ml-1"
-            src={closeIcon}
+            src={closeCircleIcon}
             size="1.6em"
-            iconSize="70%"
+            iconSize="80%"
+            tint="hsl(0 0% 80%)"
             onClick={() => changeSelected(undefined)}
           />
         {:else}
@@ -112,7 +113,7 @@
         <div class="preview">
           {getText(value)}
           {#if withClearButton && !disabled}
-            <IconButton class="ml-1" src={closeIcon} size="1.6em" iconSize="70%" />
+            <IconButton class="ml-1" src={closeCircleIcon} size="1.6em" iconSize="80%" tint="hsl(0 0% 80%)" />
           {:else}
             <div class="w-4" />
           {/if}
