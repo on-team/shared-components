@@ -16,6 +16,11 @@
   export { klass as class }
 
   $: errorMessage = _.get($errors, name, null)?.[0]
+
+  // 選択肢に含まれていない値がselectedに指定された場合はundefined扱いにする
+  $: if (selected !== undefined && !values.includes(selected)) {
+    selected = undefined
+  }
 </script>
 
 <div class={`root ${klass}`} {style} {...$$restProps}>
