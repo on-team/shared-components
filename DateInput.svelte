@@ -86,7 +86,7 @@
     @apply w-full rounded-md grid items-center bg-white text-start;
     grid-template-columns: 1fr auto;
     min-height: var(--one-line-input-height);
-    padding: 0 0.7em;
+    padding: 0.4em 0.7em;
     border: var(--tt_color_light-gray) 1px solid;
     cursor: pointer;
 

@@ -252,8 +252,7 @@
   }
 
   .option {
-    padding: 0 0.8em;
-    height: 2.5em;
+    padding: 0.4em 0.8em;
 
     @media (hover: hover) {
       &:hover {

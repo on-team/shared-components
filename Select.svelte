@@ -257,10 +257,9 @@
     text-align: start;
 
     border: none;
-    padding: 0 0.8em;
+    padding: 0.4em 0.8em;
     box-sizing: border-box;
     width: 100%;
-    height: 2.5em;
 
     background-color: white;
     font: inherit;
