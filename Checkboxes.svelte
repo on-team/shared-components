@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createField } from 'felte'
   import _ from 'lodash'
   import { Readable } from 'svelte/store'
   import Checkbox from './Checkbox.svelte'
@@ -20,6 +21,9 @@
   export { klass as class }
 
   $: errorMessage = _.get($errors, name, null)?.[0]
+
+  const { field, onInput, onBlur } =
+    name !== undefined ? createField(name) : { field: () => {}, onInput: () => {}, onBlur: () => {} }
 </script>
 
 <div
@@ -29,9 +33,25 @@
   style:--gap={gap}
   style:--grid-columns-count={gridColumnsCount}
   data-layout={layout}
+  use:field
 >
   {#each values as value}
-    <Checkbox fullWidth checked={selected?.includes(value)} {disabled}>{titles?.[value] ?? value}</Checkbox>
+    <Checkbox
+      fullWidth
+      checked={selected?.includes(value)}
+      {disabled}
+      onChangeChecked={(checked) => {
+        if (checked) {
+          selected = [...(selected ?? []), value]
+        } else {
+          selected = selected?.filter((x) => x !== value)
+        }
+        onInput(selected)
+        onBlur()
+      }}
+    >
+      {titles?.[value] ?? value}
+    </Checkbox>
   {/each}
 </div>
 
