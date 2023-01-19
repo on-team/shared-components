@@ -13,6 +13,11 @@
   type T = $$Generic<string>
   export let values: readonly T[]
   export let titles: Partial<Record<string, string>> = {}
+  /**
+   * 選択中の選択肢をvalues内の値で表す配列。
+   * 新しく選択された選択肢が配列の末尾に追加される。
+   * name属性を与えるだけではFelteのdataと双方向バインディングされないので、bind:selectedを使う必要がある点に要注意。
+   */
   export let selected: T[] | undefined = []
   export let placeholder: string = ''
   export let name: string | undefined = undefined

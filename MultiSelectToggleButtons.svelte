@@ -4,6 +4,10 @@
   type T = $$Generic<string>
   export let values: readonly T[]
   export let titles: Partial<Record<string, string>> = {}
+  /**
+   * 選択中の選択肢をvalues内の値で表す配列。
+   * 新しく選択された選択肢が配列の末尾に追加される。
+   */
   export let selected: T[] | undefined = []
   export let style: string | undefined = undefined
   let klass = ''
