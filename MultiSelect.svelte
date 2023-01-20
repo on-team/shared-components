@@ -256,35 +256,6 @@
     overflow: auto;
   }
 
-  .option {
-    padding: 0.4em 0.8em;
-
-    @media (hover: hover) {
-      &:hover {
-        background-color: hsl(0 0% 97%);
-      }
-    }
-
-    &:active {
-      background-color: hsl(0 0% 94%);
-    }
-
-    &.selected {
-      background-color: hsl(187, 60%, 95%);
-      color: var(--main_color);
-
-      @media (hover: hover) {
-        &:hover {
-          background-color: hsl(187, 60%, 93%);
-        }
-      }
-
-      &:active {
-        background-color: hsl(187, 60%, 91%);
-      }
-    }
-  }
-
   .error-message {
     @apply text-sm mt-2;
     color: var(--attention_color);
