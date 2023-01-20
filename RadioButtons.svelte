@@ -8,6 +8,9 @@
   export let titles: Partial<Record<string, string>> = {}
   export let selected: T | undefined = undefined
   export let name: string | undefined = undefined
+  export let layout: 'horizontal' | 'vertical' = 'horizontal'
+  export let gap: string = '0.3em 1em'
+  export let gridColumnsCount: number | undefined = undefined
   export let disabled: boolean = false
   /** Felteのerrorsオブジェクト。正しい型を書くのが難しい割にメリットが乏しいのでanyを使っている */
   export let errors: Readable<any> | undefined = undefined
@@ -23,9 +26,16 @@
   }
 </script>
 
-<div class={klass}>
+<div
+  class={`root ${klass}`}
+  class:hasGridColumnsCount={gridColumnsCount !== undefined}
+  {style}
+  style:--gap={gap}
+  style:--grid-columns-count={gridColumnsCount}
+  data-layout={layout}
+>
   {#each values as value}
-    <label class="label" class:disabled {style}>
+    <label class="label" class:disabled>
       <input
         type="radio"
         class="radio"
@@ -51,12 +61,30 @@
 <CommonCss />
 
 <style lang="postcss">
+  .root {
+    display: grid;
+    gap: var(--gap);
+
+    &[data-layout='vertical'] {
+      grid-template-columns: auto;
+    }
+
+    &[data-layout='horizontal'] {
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+    }
+
+    &.hasGridColumnsCount {
+      grid-template-columns: repeat(var(--grid-columns-count), max-content);
+      grid-auto-flow: initial;
+    }
+  }
+
   .label {
-    display: inline-grid;
+    display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
     gap: 0.3em;
-    vertical-align: top;
 
     cursor: pointer;
 
