@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { joinClasses } from '~/components/shared/utils'
   import chevronBottom from './chevron-bottom.svg'
   import CommonCss from './CommonCss.svelte'
   import Divider from './Divider.svelte'
@@ -12,6 +13,7 @@
   export let style: string | undefined = undefined
   let klass: string = ''
   export { klass as class }
+  export let classes: Record<string, unknown> | undefined = undefined
 
   const fold = () => (unfolded = false)
   const unfold = () => (unfolded = true)
@@ -64,7 +66,7 @@
   }
 </script>
 
-<div class="root {klass}" {style}>
+<div class={`root ${klass} ${joinClasses(classes)}`} {style}>
   <div class="flex items-center justify-between py-3 cursor-pointer" on:click={toggle}>
     <div class="px-8 font-bold">
       <slot name="title" {fold} {unfold} {toggle} />
