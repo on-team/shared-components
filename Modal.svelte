@@ -38,15 +38,15 @@
     <div class="root" transition:fade={{ duration: 150 }} on:click|self={onClickBackdrop} {...$$restProps}>
       <slot name="frame" {open} {close} {toggle}>
         <div class={`frame ${klass}`} {style}>
-          <div class="flex items-center justify-between p-1.5" class:hidden={!$$slots.title && !showCloseButton}>
+          <div class="flex items-center justify-between py-1.5" class:hidden={!$$slots.title && !showCloseButton}>
             {#if centeringTitle}
               <!-- タイトルのきちんと中央寄せしつつ、長いテキストを適切に折り返すために左右に同サイズの要素を置く -->
               <IconButton class="invisible" src={closeIcon} />
             {/if}
-            <span class="px-8 text-base font-bold" class:text-center={centeringTitle}>
+            <span class="px-4 text-base font-bold" class:text-center={centeringTitle}>
               <slot name="title" />
             </span>
-            <IconButton classes={{ invisible: !showCloseButton }} src={closeIcon} onClick={close} />
+            <IconButton class="mx-1.5" classes={{ invisible: !showCloseButton }} src={closeIcon} onClick={close} />
           </div>
           <Divider classes={{ hidden: !$$slots.title }} />
 
