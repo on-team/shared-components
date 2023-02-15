@@ -43,7 +43,7 @@
               <!-- タイトルのきちんと中央寄せしつつ、長いテキストを適切に折り返すために左右に同サイズの要素を置く -->
               <IconButton class="invisible" src={closeIcon} />
             {/if}
-            <span class="px-2 text-base font-bold" class:text-center={centeringTitle}>
+            <span class="px-8 text-base font-bold" class:text-center={centeringTitle}>
               <slot name="title" />
             </span>
             <IconButton classes={{ invisible: !showCloseButton }} src={closeIcon} onClick={close} />
