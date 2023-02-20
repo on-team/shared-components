@@ -104,18 +104,18 @@
       }
 
       &[data-color='achromatic'] {
-        background-color: hsl(0, 0%, 93%);
+        background-color: var(--bg_color_sub1);
         color: var(--tt_color_gray);
 
         @media (hover: hover) {
           &:hover {
-            background-color: hsl(0, 0%, 89%);
+            background-color: hsl(0, 0%, 82%);
             transition-duration: 0s;
           }
         }
 
         &:active {
-          background-color: hsl(0, 0%, 85%);
+          background-color: hsl(0, 0%, 78%);
           transition-duration: 0s;
         }
 
