@@ -242,7 +242,14 @@
         </slot>
       </div>
 
-      <a class="body-row" href={rowHref?.(row)} on:click={() => onClickRow?.(row)}>
+      <a
+        class="body-row"
+        href={rowHref?.(row)}
+        on:click={(event) => {
+          if (event.defaultPrevented) return
+          return onClickRow?.(row)
+        }}
+      >
         {#each columns as column, columnIndex}
           <div class="vertical-ruled-line">
             <slot name="vertical-ruled-line" {rowIndex} {columnIndex} />
