@@ -17,12 +17,18 @@
   export let style: string | undefined = undefined
   let klass = ''
   export { klass as class }
+  export let onChangeSelected: ((selected: T | undefined) => void) | undefined = undefined
 
   $: errorMessage = _.get($errors, name, null)?.[0]
 
   // 選択肢に含まれていない値がselectedに指定された場合はundefined扱いにする
   $: if (selected !== undefined && !values.includes(selected)) {
     selected = undefined
+  }
+
+  function changeSelected(newSelected: T | undefined) {
+    selected = newSelected
+    onChangeSelected?.(newSelected)
   }
 </script>
 
@@ -43,7 +49,7 @@
         {name}
         checked={selected === value}
         {disabled}
-        on:click={() => (selected = value)}
+        on:click={() => changeSelected(value)}
       />
       <slot {value} title={titles?.[value]}>
         {titles?.[value] ?? value}
