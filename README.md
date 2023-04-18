@@ -10,9 +10,9 @@ gitのsubmodule機能を使って共有します。
 
 コンポーネントの見た目や使い方を確認するためのウェブページが用意されています。  
 専用の環境を新たに構築する手間を省略するために、そのウェブページはon-Line-Subscribeリポジトリに内蔵されています。  
-URLはon-Line-Subscribeの[README](https://github.com/on-team/on-Line-Subscribe#readme)に載っています。  
+カタログページのURLはon-Line-Subscribeの[README](https://github.com/on-team/on-Line-Subscribe#readme)に載っています。  
 
-*コンポーネント本体を更新したらカタログページも更新してください。*  
+*コンポーネント本体を更新したらそれに合わせてカタログページの内容も更新してください。*  
 例えば新しいPropsを追加した場合、そのPropsを使うサンプルを掲載してください。  
 
 ## 他のプロジェクトで新たにshared-componentsを使う方法
@@ -29,7 +29,7 @@ git submodule add https://github.com/on-team/shared-components.git web/src/compo
 
 ### 要求するnpmパッケージ
 
-shared-componentsは下記のnpmパッケージに依存しています。  
+現在、shared-componentsは下記のnpmパッケージに依存しています。  
 shared-componentsを使うプロジェクト内にこれらがインストールされていなければ使えません。  
 
 - dayjs
@@ -39,15 +39,15 @@ shared-componentsを使うプロジェクト内にこれらがインストール
 - @roxi/routify
 
 なお各パッケージのバージョンが古すぎる場合はエラーが出る可能性があります。  
-あるいは新しいメジャーバージョンにshared-componentsが対応できていない場合は最新版でもエラーが出る可能性があります。  
+あるいは逆にshared-components側が対応できていない場合は最新版でもエラーが出る可能性があります。  
 （どの範囲のバージョンなら動くのかを厳密に管理するのは難しいので、このような注意書きに留めています）  
 
 ## shared-componentsを更新・アップデートする手順
 
-ソースコードを編集してshared-componentsリポジトリにコミット&プッシュするだけでは、  
-shared-componentsをsubmoduleとして使っているリポジトリは更新されません（過去のコミット時点を参照し続けます）。  
+共通コンポーネントのソースコードを編集してshared-componentsリポジトリにコミット&プッシュするだけでは、  
+shared-componentsをsubmoduleとして使っているリポジトリは更新されません（過去のコミット時点のshared-componentsを参照し続けます）。  
 
-最新版にアップデートするには次のコマンドを実行してください。  
+最新版を参照するようアップデートするには、shared-componentsをsubmoduleとして使っているリポジトリのルートディレクトリで次のコマンドを実行してください。  
 
 ```bash
 git submodule update --remote
