@@ -11,8 +11,9 @@ gitのsubmodule機能を使って共有します。
 コンポーネントの見た目や使い方を確認するためのウェブページが用意されています。  
 専用の環境を新たに構築する手間を省略するために、そのウェブページはon-Line-Subscribeリポジトリに内蔵されています。  
 カタログページのURLはon-Line-Subscribeの[README](https://github.com/on-team/on-Line-Subscribe#readme)に載っています。  
+※本来こういうカタログページは[Storybook](https://storybook.js.org/)を使って構築するのがトレンドですが、技術調査が間に合っておらずこのような形態になっています  
 
-*コンポーネント本体を更新したらそれに合わせてカタログページの内容も更新してください。*  
+*shared-componentsのコンポーネントを更新したらそれに合わせてカタログページの内容も更新してください。*  
 例えば新しいPropsを追加した場合、そのPropsを使うサンプルを掲載してください。  
 
 ## 他のプロジェクトで新たにshared-componentsを使う方法
@@ -25,7 +26,7 @@ git submodule add https://github.com/on-team/shared-components.git web/src/compo
 
 なお`git clone`コマンドに`--recursive`オプションを付けないとsubmoduleのファイルは取得されませんが、  
 `git submodule update --init`コマンドで後から取得できます。  
-（submodule追加時はそのことをREADME.mdに追記しておくべきでしょう）  
+（プロジェクトにsubmoduleを追加したら上記の対応をしないとビルドに失敗するのでREADME.mdに追記しておくべきです）  
 
 ### 要求するnpmパッケージ
 
