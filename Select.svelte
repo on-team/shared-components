@@ -257,6 +257,7 @@
     text-align: start;
 
     border: none;
+    outline-offset: -2px;
     padding: 0.8em 0.8em;
     box-sizing: border-box;
     width: 100%;
