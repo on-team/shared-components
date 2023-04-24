@@ -11,7 +11,7 @@ gitのsubmodule機能を使って共有します[^1]。
 専用の環境を新たに構築する手間を省略するために、そのウェブページはon-Line-Subscribeリポジトリに内蔵されています[^2]。  
 カタログページのURLはon-Line-Subscribeの[README](https://github.com/on-team/on-Line-Subscribe#readme)に載っています。  
 
-*shared-componentsのコンポーネントを更新したらそれに合わせてカタログページの内容も更新してください。*  
+**shared-componentsのコンポーネントを更新したらそれに合わせてカタログページの内容も更新してください。**  
 例えば新しいPropsを追加した場合、そのPropsを使うサンプルを掲載してください。  
 
 ## 他のプロジェクトで新たにshared-componentsを使う方法
