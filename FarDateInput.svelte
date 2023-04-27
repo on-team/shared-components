@@ -28,7 +28,13 @@
   }
 </script>
 
-<div class="root {klass}" class:disabled {style} on:click={() => disabled || (isDatePickerOpened = true)}>
+<button
+  class="root {klass}"
+  class:disabled
+  {style}
+  type="button"
+  on:click={() => disabled || (isDatePickerOpened = true)}
+>
   {#if value}
     <div>
       <slot {value}>{value}</slot>
@@ -38,7 +44,7 @@
   {/if}
   <Icon src={calendarIcon} size="1.1em" />
   <input class="hidden" {name} {placeholder} value={value ?? null} {disabled} />
-</div>
+</button>
 
 {#if errorMessage}
   <div class="error-message">

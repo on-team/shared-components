@@ -67,12 +67,12 @@
 </script>
 
 <div class={`root ${klass} ${joinClasses(classes)}`} {style}>
-  <div class="flex items-center justify-between py-3 cursor-pointer" on:click={toggle}>
+  <button class="flex items-center justify-between py-3 cursor-pointer" type="button" on:click={toggle}>
     <div class="px-8 font-bold">
       <slot name="title" {fold} {unfold} {toggle} />
     </div>
     <IconButton class="mx-3" src={chevronBottom} />
-  </div>
+  </button>
   {#if unfolded}
     <Divider />
   {/if}

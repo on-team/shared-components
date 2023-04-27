@@ -13,16 +13,17 @@
 <div class={klass}>
   <div class="tab-bar">
     {#each tabIds as tabId}
-      <div
+      <button
         class="tab"
         class:selected={tabId === selected}
+        type="button"
         on:click={() => {
           selected = tabId
           onChangeCurrentTabId?.(selected)
         }}
       >
         <slot name="title" {tabId} {selected}>{tabId}</slot>
-      </div>
+      </button>
     {/each}
   </div>
   <!-- 
