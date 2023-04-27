@@ -40,12 +40,12 @@
    * ページ移動ボタンが押下された際に呼ばれるコールバック関数。
    * バックエンドでページネーションする場合はこの関数内でAPIを呼び直してDataTableを再描画する設計を想定。
    */
-  export let onChangeCurrentPageIndex: ((pageIndex: number) => void) | undefined = undefined
+  export let onChangeCurrentPageIndex: ((pageIndex: number) => unknown) | undefined = undefined
   /**
    * カラムのソートボタンが押下された際に呼ばれるコールバック関数。
    * バックエンドでページネーションする場合はこの関数内でAPIを呼び直してDataTableを再描画する設計を想定。
    */
-  export let onChangeSortingState: ((sortingState: SortingState) => void) | undefined = undefined
+  export let onChangeSortingState: ((sortingState: SortingState) => unknown) | undefined = undefined
   export let style: string | undefined = undefined
   /** rowsの内容が変わった時（例えば検索機能でフィルタリングされた時）にページ番号をリセットする必要がある*/
   export let currentPageIndex: number = 0
