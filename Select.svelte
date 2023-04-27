@@ -8,7 +8,7 @@
   import Icon from './Icon.svelte'
   import IconButton from './IconButton.svelte'
   import Portal from './Portal.svelte'
-  import { lockBodyScroll } from './utils'
+  import { isNestedClickEvent, lockBodyScroll } from './utils'
 
   type T = $$Generic<string>
   export let values: readonly T[]
@@ -46,7 +46,7 @@
   let dropdownInfo: DropdownInfo | undefined = undefined
 
   function onClickLauncher(event: MouseEvent) {
-    if (event.defaultPrevented) return
+    if (isNestedClickEvent(event)) return
 
     if (event.currentTarget instanceof HTMLElement) {
       const rect = event.currentTarget.getBoundingClientRect()

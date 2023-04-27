@@ -17,7 +17,7 @@
   import chevronRightIcon from './chevron-right.svg'
   import pageFirstIcon from './page-first.svg'
   import pageLastIcon from './page-last.svg'
-  import { objectEntries } from './utils'
+  import { isNestedClickEvent, objectEntries } from './utils'
 
   // TODO: slotのlet変数の型を処理系が認識できるようにする
 
@@ -244,7 +244,7 @@
         class="body-row"
         href={rowHref?.(row)}
         on:click={(event) => {
-          if (event.defaultPrevented) return
+          if (isNestedClickEvent(event)) return
           return onClickRow?.(row)
         }}
       >

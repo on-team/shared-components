@@ -9,6 +9,7 @@
   import Icon from './Icon.svelte'
   import IconButton from './IconButton.svelte'
   import Modal from './Modal.svelte'
+  import { isNestedClickEvent } from './utils'
 
   export let name: string = ''
   export let placeholder: string = ''
@@ -41,7 +42,7 @@
   type="button"
   {disabled}
   on:click={(event) => {
-    if (event.defaultPrevented) return
+    if (isNestedClickEvent(event)) return
 
     isDatePickerOpened = true
   }}

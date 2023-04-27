@@ -53,6 +53,55 @@ export function objectEntries<K extends string, T>(value: Record<K, T>): readonl
   return Object.entries(value) as any
 }
 
+/**
+ * クリック可能な要素がネストしているとき、clickイベントを二重処理してしまう問題の対策用関数。
+ * 例えば以下のようなDOM構造でbutton押下時にa要素のon:clickも実行されることが問題になる。
+ * <a href={...} on:click={...}>
+ *   <button on:click={...}>Inner button</button>
+ *   Outer contents
+ * </a>
+ */
+export function isNestedClickEvent(event: MouseEvent) {
+  if (!(event.currentTarget instanceof Element)) return false
+  if (!(event.target instanceof Element)) return false
+
+  return detectNestedClickableElement(event.currentTarget, event.target)
+}
+
+function detectNestedClickableElement(currentTarget: Element, target: Element): boolean {
+  if (currentTarget === target) return false
+
+  if (isClickable(target)) return true
+
+  return detectNestedClickableElement(currentTarget, target.parentElement!)
+}
+
+function isClickable(element: Element): boolean {
+  const contenteditable = element.getAttribute('contenteditable')
+  if (contenteditable && contenteditable !== 'false') return true
+
+  return (
+    new Set(['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'SUMMARY']).has(element.tagName) ||
+    new Set([
+      'link',
+      'menuitem',
+      'button',
+      'spinbutton',
+      'slider',
+      'scrollbar',
+      'textbox',
+      'option',
+      'radio',
+      'menuitemradio',
+      'checkbox',
+      'menuitemcheckbox',
+      'treeitem',
+      'switch',
+      'tab',
+    ]).has(element.getAttribute('role') ?? '')
+  )
+}
+
 export function lockBodyScroll(element: HTMLElement) {
   disableBodyScroll(element)
 
