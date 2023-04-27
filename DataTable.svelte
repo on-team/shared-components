@@ -8,18 +8,17 @@
 
 <script lang="ts">
   import _ from 'lodash'
-  import chevronLeftIcon from './chevron-left.svg'
-  import chevronRightIcon from './chevron-right.svg'
   import CommonCss from './CommonCss.svelte'
   import DataTableCell from './DataTableCell.svelte'
   import Divider from './Divider.svelte'
   import IconButton from './IconButton.svelte'
+  import SortButton from './SortButton.svelte'
+  import chevronLeftIcon from './chevron-left.svg'
+  import chevronRightIcon from './chevron-right.svg'
   import pageFirstIcon from './page-first.svg'
   import pageLastIcon from './page-last.svg'
-  import SortButton from './SortButton.svelte'
   import { objectEntries } from './utils'
 
-  // TODO: 細かい見た目（余白、色など）の調整を行う
   // TODO: slotのlet変数の型を処理系が認識できるようにする
 
   type Row = $$Generic<Record<string, unknown>>
@@ -237,8 +236,7 @@
       {@const rowIndex = index + 1}
       <div class="horizontal-ruled-line">
         <slot name="horizontal-ruled-line" {rowIndex}>
-          <!-- TODO: 色を定数化 -->
-          <Divider color={rowIndex === 1 ? 'hsl(183, 5%, 53%)' : 'hsl(180, 11%, 73%)'} />
+          <Divider color={rowIndex === 1 ? 'var(--line_color_black)' : '  var(--line_color_gray)'} />
         </slot>
       </div>
 
@@ -271,8 +269,7 @@
     {:else}
       <div class="horizontal-ruled-line">
         <slot name="horizontal-ruled-line" rowIndex={1}>
-          <!-- TODO: 色を定数化 -->
-          <Divider color="hsl(183, 5%, 53%)" />
+          <Divider color="var(--line_color_black)" />
         </slot>
       </div>
       <div class="empty-state">データがありません</div>
@@ -280,8 +277,7 @@
 
     <div class="horizontal-ruled-line">
       <slot name="horizontal-ruled-line" rowIndex={currentPageRows.length + 1}>
-        <!-- TODO: 色を定数化 -->
-        <Divider color="hsl(180, 11%, 73%)" />
+        <Divider color="var(--line_color_gray)" />
       </slot>
     </div>
   </div>
