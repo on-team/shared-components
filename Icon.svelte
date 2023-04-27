@@ -26,6 +26,7 @@
     {src}
     alt=""
     aria-label={ariaLabel}
+    draggable="false"
   />
 {:else}
   <div
@@ -35,6 +36,7 @@
     style:--url="url('{src}')"
     style:--tint={tint}
     aria-label={ariaLabel}
+    draggable="false"
   />
 {/if}
 
