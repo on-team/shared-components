@@ -244,7 +244,12 @@
         class="body-row"
         href={rowHref?.(row)}
         on:click={(event) => {
-          if (isNestedClickEvent(event)) return
+          if (isNestedClickEvent(event)) {
+            // 例えば行内のボタン押下時に画面遷移を暴発させないために必要
+            event.preventDefault()
+            return
+          }
+
           return onClickRow?.(row)
         }}
       >
