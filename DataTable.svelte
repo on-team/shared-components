@@ -221,7 +221,7 @@
             <SortButton
               sorted={sortingState?.columnId === columnId}
               reversed={sortingState?.columnId === columnId && sortingState.reversed}
-              on:click={() => onClickSortButton(columnId)}
+              onClick={() => onClickSortButton(columnId)}
             />
           {/if}
         </div>
