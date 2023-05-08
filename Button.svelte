@@ -247,7 +247,7 @@
         }
 
         &:active {
-          background-color: hsla(89, 43%, 96%);
+          background-color: hsl(89, 43%, 96%);
           transition-duration: 0s;
         }
 
@@ -430,7 +430,7 @@
         }
 
         &:active {
-          background-color: hsla(89, 43%, 96%);
+          background-color: hsl(89, 43%, 96%);
           transition-duration: 0s;
         }
 
