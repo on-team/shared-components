@@ -274,7 +274,7 @@
         }
 
         &:active {
-          background-color: hsl(0, 0%, 94%);
+          background-color: hsl(187, 60%, 96%);
           transition-duration: 0s;
         }
 
