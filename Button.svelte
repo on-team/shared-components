@@ -4,7 +4,7 @@
   import Spinner from './Spinner.svelte'
   import { isExternalUrl } from './utils'
 
-  export let color: 'primary' | 'achromatic' | 'attention' = 'primary'
+  export let color: 'primary' | 'achromatic' | 'attention' | 'secondary' = 'primary'
   export let variant: 'solid' | 'ghost' | 'outline' | 'text' = 'solid'
   export let fullWidth: boolean = false
   export let type: 'submit' | 'button' | 'reset' = 'button'
@@ -142,6 +142,27 @@
           background-color: hsl(349, 50%, 85%);
         }
       }
+
+      &[data-color='secondary'] {
+        background-color: var(--secondary_color);
+        color: white;
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsl(89, 43%, 52%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(89, 43%, 50%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          background-color: hsl(89, 37%, 84%);
+        }
+      }
     }
 
     &[data-variant='ghost'] {
@@ -213,6 +234,29 @@
           color: hsl(0, 0%, 75%);
         }
       }
+
+      &[data-color='secondary'] {
+        border: var(--secondary_color) 1px solid;
+        color: var(--secondary_color);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsla(0, 0%, 50%, 10%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(89, 43%, 96%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          border: none;
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
     }
 
     &[data-variant='outline'] {
@@ -230,7 +274,7 @@
         }
 
         &:active {
-          background-color: hsl(0, 0%, 94%);
+          background-color: hsl(187, 60%, 96%);
           transition-duration: 0s;
         }
 
@@ -277,6 +321,29 @@
 
         &:active {
           background-color: hsl(0, 0%, 94%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          border: none;
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+
+      &[data-color='secondary'] {
+        border: var(--secondary_color) 1px solid;
+        color: var(--secondary_color);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsl(0, 0%, 97%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(89, 43%, 96%);
           transition-duration: 0s;
         }
 
@@ -343,6 +410,27 @@
 
         &:active {
           background-color: hsl(349, 100%, 98%);
+          transition-duration: 0s;
+        }
+
+        &.disabled {
+          background-color: hsl(0, 0%, 96%);
+          color: hsl(0, 0%, 75%);
+        }
+      }
+
+      &[data-color='secondary'] {
+        color: var(--secondary_color);
+
+        @media (hover: hover) {
+          &:hover {
+            background-color: hsla(0, 0%, 50%, 10%);
+            transition-duration: 0s;
+          }
+        }
+
+        &:active {
+          background-color: hsl(89, 43%, 96%);
           transition-duration: 0s;
         }
 
