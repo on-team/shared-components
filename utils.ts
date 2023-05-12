@@ -73,6 +73,12 @@ function detectNestedClickableElement(currentTarget: Element, target: Element): 
 
   if (isClickable(target)) return true
 
+  // 原因不明の不具合の対策のための分岐。
+  // 例えばrowHref付きのDataTableの行の中のIconButtonを押した場合、どういうわけかtarget.parentElementがnullになる。
+  // （IconButtonの実装を確認したが、DOM構造上targetの親が無くなることは考えられない）
+  // なのでこの分岐ではparentElementがnullの場合はその不具合だと判断してtrueを返す。
+  if (target.parentElement === null) return true
+
   return detectNestedClickableElement(currentTarget, target.parentElement!)
 }
 
