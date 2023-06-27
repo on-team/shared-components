@@ -12,6 +12,7 @@
   /** Felteのerrorsオブジェクト。正しい型を書くのが難しい割にメリットが乏しいのでanyを使っている */
   export let errors: Readable<any> | undefined = undefined
   export let style: string | undefined = undefined
+  export let onChangeSelected: (selected: Value | undefined) => void = () => {}
   let klass = ''
   export { klass as class }
 
@@ -25,7 +26,14 @@
 
 <div class={`root ${klass}`} {style} {...$$restProps}>
   {#each values as value (value)}
-    <button class:selected={value === selected} type="button" on:click={() => (selected = value)}>
+    <button
+      class:selected={value === selected}
+      type="button"
+      on:click={() => {
+        selected = value
+        onChangeSelected(selected)
+      }}
+    >
       {titles[value] ?? value}
     </button>
   {/each}
