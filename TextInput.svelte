@@ -5,7 +5,7 @@
 
   export let name: string = ''
   export let placeholder: string = ''
-  export let value: string = ''
+  export let value: string | number = ''
   export let type: string = 'text'
   export let autocomplete: string = ''
   export let disabled = false
