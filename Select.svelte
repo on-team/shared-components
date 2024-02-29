@@ -20,6 +20,7 @@
   export let errors: Readable<any> | undefined = undefined
   export let disabled: boolean = false
   export let fullWidth = false
+  export let fontSize: string | undefined = '1em'
   export let withClearButton = false
   export let onChangeSelected: ((selected: T | undefined) => void) | undefined = undefined
   export let style: string | undefined = undefined
@@ -97,6 +98,7 @@
   class:disabled
   class:opened={dropdownInfo !== undefined}
   class:full-width={fullWidth}
+  style:font-size={fontSize}
   {style}
   type="button"
   {disabled}
@@ -152,6 +154,7 @@
         style:--dropdown-anchor={`${dropdownInfo.anchorPx}px`}
         style:--dropdown-width={`${dropdownInfo.widthPx}px`}
         style:--dropdown-man-height={`${dropdownInfo.maxHeightPx}px`}
+        style:font-size={fontSize}
         use:lockBodyScroll
       >
         {#each values as value, i}
