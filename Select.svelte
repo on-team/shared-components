@@ -1,13 +1,13 @@
 <script lang="ts">
   import _ from 'lodash'
   import { Readable } from 'svelte/store'
-  import chevronBottom from './chevron-bottom.svg'
-  import closeCircleIcon from './close-circle.svg'
   import CommonCss from './CommonCss.svelte'
   import Divider from './Divider.svelte'
   import Icon from './Icon.svelte'
   import IconButton from './IconButton.svelte'
   import Portal from './Portal.svelte'
+  import chevronBottom from './chevron-bottom.svg'
+  import closeCircleIcon from './close-circle.svg'
   import { isNestedClickEvent, lockBodyScroll } from './utils'
 
   type T = $$Generic<string>
@@ -20,9 +20,11 @@
   export let errors: Readable<any> | undefined = undefined
   export let disabled: boolean = false
   export let fullWidth = false
+  export let fontSize: string | undefined = '1em'
   export let withClearButton = false
   export let onChangeSelected: ((selected: T | undefined) => void) | undefined = undefined
   export let style: string | undefined = undefined
+  export let reverse: boolean = false
   let klass = ''
   export { klass as class }
 
@@ -42,7 +44,7 @@
     onChangeSelected?.(newSelected)
   }
 
-  type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number }
+  type DropdownInfo = { leftPx: number; anchorPx: number; widthPx: number; maxHeightPx: number }
   let dropdownInfo: DropdownInfo | undefined = undefined
 
   function onClickLauncher(event: MouseEvent) {
@@ -50,11 +52,21 @@
 
     if (event.currentTarget instanceof HTMLElement) {
       const rect = event.currentTarget.getBoundingClientRect()
-      dropdownInfo = {
-        leftPx: rect.left,
-        topPx: rect.bottom,
-        widthPx: rect.width,
-        maxHeightPx: window.innerHeight - rect.bottom,
+
+      if (!reverse) {
+        dropdownInfo = {
+          leftPx: rect.left,
+          anchorPx: rect.bottom,
+          widthPx: rect.width,
+          maxHeightPx: window.innerHeight - rect.bottom,
+        }
+      } else {
+        dropdownInfo = {
+          leftPx: rect.left,
+          anchorPx: window.innerHeight - rect.top,
+          widthPx: rect.width,
+          maxHeightPx: rect.top,
+        }
       }
     }
   }
@@ -86,6 +98,7 @@
   class:disabled
   class:opened={dropdownInfo !== undefined}
   class:full-width={fullWidth}
+  style:font-size={fontSize}
   {style}
   type="button"
   {disabled}
@@ -136,10 +149,12 @@
     <div class="backdrop" use:setupBackdrop>
       <div
         class="dropdown"
+        class:reverse
         style:--dropdown-left={`${dropdownInfo.leftPx}px`}
-        style:--dropdown-top={`${dropdownInfo.topPx}px`}
+        style:--dropdown-anchor={`${dropdownInfo.anchorPx}px`}
         style:--dropdown-width={`${dropdownInfo.widthPx}px`}
         style:--dropdown-man-height={`${dropdownInfo.maxHeightPx}px`}
+        style:font-size={fontSize}
         use:lockBodyScroll
       >
         {#each values as value, i}
@@ -240,7 +255,7 @@
   .dropdown {
     position: fixed;
     left: var(--dropdown-left);
-    top: var(--dropdown-top);
+    top: var(--dropdown-anchor);
     box-sizing: border-box;
     width: var(--dropdown-width);
     max-height: var(--dropdown-man-height);
@@ -249,6 +264,11 @@
     box-shadow: 0 3px 14px hsla(0, 0%, 0%, 20%);
 
     overflow: auto;
+  }
+
+  .dropdown.reverse {
+    top: initial;
+    bottom: var(--dropdown-anchor);
   }
 
   .option {
