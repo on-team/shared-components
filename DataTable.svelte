@@ -3,7 +3,10 @@
     | string
     | { id: string; title?: string; sortable?: boolean; width?: string; align?: 'left' | 'center' | 'right' }
 
-  export type SortingState = { columnId: string; reversed: boolean }
+  export type SortDirection = 'asc' | 'desc' | 'none';
+
+  export type SortingState = { columnId: string; direction: SortDirection; reversed: boolean }
+
 </script>
 
 <script lang="ts">
@@ -152,14 +155,15 @@
 
   async function onClickSortButton(columnId: string) {
     if (sortingState?.columnId === columnId) {
-      await onChangeSortingState?.({ columnId, reversed: !sortingState.reversed })
+      const newReversed = !sortingState.reversed;
+      await onChangeSortingState?.({ columnId, direction: sortingState.direction, reversed: newReversed })
       if (!isBackendPagination) {
         sortingState.reversed = !sortingState.reversed
       }
     } else {
-      await onChangeSortingState?.({ columnId, reversed: false })
+      await onChangeSortingState?.({ columnId, direction: 'asc', reversed: false })
       if (!isBackendPagination) {
-        sortingState = { columnId, reversed: false }
+        sortingState = { columnId, direction: 'asc', reversed: false  }
       }
     }
   }
