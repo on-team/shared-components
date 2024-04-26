@@ -7,16 +7,15 @@
 </script>
 
 <script lang="ts">
+  import { paginationStore, updatePageSize } from './pagination'
+
   import _ from 'lodash'
+  import { onMount } from 'svelte'
   import CommonCss from './CommonCss.svelte'
   import DataTableCell from './DataTableCell.svelte'
   import Divider from './Divider.svelte'
-  import IconButton from './IconButton.svelte'
+  import Select from './Select.svelte'
   import SortButton from './SortButton.svelte'
-  import chevronLeftIcon from './chevron-left.svg'
-  import chevronRightIcon from './chevron-right.svg'
-  import pageFirstIcon from './page-first.svg'
-  import pageLastIcon from './page-last.svg'
   import { isNestedClickEvent, objectEntries } from './utils'
 
   // TODO: slotのlet変数の型を処理系が認識できるようにする
@@ -74,6 +73,12 @@
   })()
 
   $: templateColumns = `max-content ${columns.map(getColumnWidth).join(' max-content ')} max-content`
+
+  const options: string[] = ['10', '30', '50', '100']
+
+  onMount(() => {
+    pageSize = $paginationStore.pageSize
+  })
 
   function sort(rows: readonly Row[], sorted: { columnId: string; reversed: boolean } | undefined): readonly Row[] {
     const result = rows.slice()
@@ -164,31 +169,11 @@
     }
   }
 
-  async function toFirstPage() {
-    await onChangeCurrentPageIndex?.(0)
-    if (!isBackendPagination) {
-      currentPageIndex = 0
-    }
-  }
-
-  async function toPrevPage() {
-    await onChangeCurrentPageIndex?.(currentPageIndex - 1)
-    if (!isBackendPagination) {
-      currentPageIndex--
-    }
-  }
-
-  async function toNextPage() {
-    await onChangeCurrentPageIndex?.(currentPageIndex + 1)
-    if (!isBackendPagination) {
-      currentPageIndex++
-    }
-  }
-
-  async function toLastPage() {
+  async function handleChangePagination(value: string) {
+    updatePageSize(Number(value))
     await onChangeCurrentPageIndex?.(lastPageIndex)
     if (!isBackendPagination) {
-      currentPageIndex = lastPageIndex
+      pageSize = Number(value)
     }
   }
 </script>
@@ -292,10 +277,12 @@
       {#if rowsCount > 0}
         {rowsCount}件中、{1 + currentPageIndex * pageSize}~{currentPageIndex * pageSize + currentPageRows.length}件表示
       {/if}
-      <IconButton src={pageFirstIcon} disabled={currentPageIndex === 0} onClick={toFirstPage} />
-      <IconButton src={chevronLeftIcon} disabled={currentPageIndex === 0} onClick={toPrevPage} />
-      <IconButton src={chevronRightIcon} disabled={currentPageIndex === lastPageIndex} onClick={toNextPage} />
-      <IconButton src={pageLastIcon} disabled={currentPageIndex === lastPageIndex} onClick={toLastPage} />
+      <Select
+        values={options}
+        selected={pageSize.toString()}
+        reverse={true}
+        onChangeSelected={handleChangePagination}
+      />
     </div>
   {/if}
 </div>
