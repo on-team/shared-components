@@ -14,8 +14,13 @@
   import CommonCss from './CommonCss.svelte'
   import DataTableCell from './DataTableCell.svelte'
   import Divider from './Divider.svelte'
+  import IconButton from './IconButton.svelte'
   import Select from './Select.svelte'
   import SortButton from './SortButton.svelte'
+  import chevronLeftIcon from './chevron-left.svg'
+  import chevronRightIcon from './chevron-right.svg'
+  import pageFirstIcon from './page-first.svg'
+  import pageLastIcon from './page-last.svg'
   import { isNestedClickEvent, objectEntries } from './utils'
 
   // TODO: slotのlet変数の型を処理系が認識できるようにする
@@ -169,6 +174,34 @@
     }
   }
 
+  async function toFirstPage() {
+    await onChangeCurrentPageIndex?.(0)
+    if (!isBackendPagination) {
+      currentPageIndex = 0
+    }
+  }
+
+  async function toPrevPage() {
+    await onChangeCurrentPageIndex?.(currentPageIndex - 1)
+    if (!isBackendPagination) {
+      currentPageIndex--
+    }
+  }
+
+  async function toNextPage() {
+    await onChangeCurrentPageIndex?.(currentPageIndex + 1)
+    if (!isBackendPagination) {
+      currentPageIndex++
+    }
+  }
+
+  async function toLastPage() {
+    await onChangeCurrentPageIndex?.(lastPageIndex)
+    if (!isBackendPagination) {
+      currentPageIndex = lastPageIndex
+    }
+  }
+
   async function handleChangePagination(value: string) {
     updatePageSize(Number(value))
     await onChangeCurrentPageIndex?.(lastPageIndex)
@@ -277,6 +310,10 @@
       {#if rowsCount > 0}
         {rowsCount}件中、{1 + currentPageIndex * pageSize}~{currentPageIndex * pageSize + currentPageRows.length}件表示
       {/if}
+      <IconButton src={pageFirstIcon} disabled={currentPageIndex === 0} onClick={toFirstPage} />
+      <IconButton src={chevronLeftIcon} disabled={currentPageIndex === 0} onClick={toPrevPage} />
+      <IconButton src={chevronRightIcon} disabled={currentPageIndex === lastPageIndex} onClick={toNextPage} />
+      <IconButton src={pageLastIcon} disabled={currentPageIndex === lastPageIndex} onClick={toLastPage} />
       <Select
         values={options}
         selected={pageSize.toString()}
