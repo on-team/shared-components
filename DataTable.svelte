@@ -317,7 +317,7 @@
       <Select
         values={options}
         selected={pageSize.toString()}
-        reverse={true}
+        reverse
         onChangeSelected={handleChangePagination}
       />
     </div>
