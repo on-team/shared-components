@@ -7,10 +7,9 @@
 </script>
 
 <script lang="ts">
-  import { paginationStore, updatePageSize } from './pagination'
+  import { updatePageSize } from './pagination'
 
   import _ from 'lodash'
-  import { onMount } from 'svelte'
   import CommonCss from './CommonCss.svelte'
   import DataTableCell from './DataTableCell.svelte'
   import Divider from './Divider.svelte'
@@ -79,11 +78,7 @@
 
   $: templateColumns = `max-content ${columns.map(getColumnWidth).join(' max-content ')} max-content`
 
-  const options: string[] = ['10', '30', '50', '100']
-
-  onMount(() => {
-    pageSize = $paginationStore.pageSize
-  })
+  const pageSizeOptions: string[] = ['10', '30', '50', '100']
 
   function sort(rows: readonly Row[], sorted: { columnId: string; reversed: boolean } | undefined): readonly Row[] {
     const result = rows.slice()
@@ -204,9 +199,10 @@
 
   async function handleChangePagination(value: string) {
     updatePageSize(Number(value))
-    await onChangeCurrentPageIndex?.(lastPageIndex)
+    await onChangeCurrentPageIndex?.(0)
     if (!isBackendPagination) {
       pageSize = Number(value)
+      currentPageIndex = 0
     }
   }
 </script>
@@ -315,7 +311,7 @@
       <IconButton src={chevronRightIcon} disabled={currentPageIndex === lastPageIndex} onClick={toNextPage} />
       <IconButton src={pageLastIcon} disabled={currentPageIndex === lastPageIndex} onClick={toLastPage} />
       <Select
-        values={options}
+        values={pageSizeOptions}
         selected={pageSize.toString()}
         reverse
         onChangeSelected={handleChangePagination}
