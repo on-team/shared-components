@@ -7,11 +7,14 @@
 </script>
 
 <script lang="ts">
+  import { updatePageSize } from './pagination'
+
   import _ from 'lodash'
   import CommonCss from './CommonCss.svelte'
   import DataTableCell from './DataTableCell.svelte'
   import Divider from './Divider.svelte'
   import IconButton from './IconButton.svelte'
+  import Select from './Select.svelte'
   import SortButton from './SortButton.svelte'
   import chevronLeftIcon from './chevron-left.svg'
   import chevronRightIcon from './chevron-right.svg'
@@ -74,6 +77,8 @@
   })()
 
   $: templateColumns = `max-content ${columns.map(getColumnWidth).join(' max-content ')} max-content`
+
+  const pageSizeOptions: string[] = ['10', '30', '50', '100']
 
   function sort(rows: readonly Row[], sorted: { columnId: string; reversed: boolean } | undefined): readonly Row[] {
     const result = rows.slice()
@@ -191,6 +196,15 @@
       currentPageIndex = lastPageIndex
     }
   }
+
+  async function handleChangePagination(value: string) {
+    updatePageSize(Number(value))
+    await onChangeCurrentPageIndex?.(0)
+    if (!isBackendPagination) {
+      pageSize = Number(value)
+      currentPageIndex = 0
+    }
+  }
 </script>
 
 <div
@@ -296,6 +310,12 @@
       <IconButton src={chevronLeftIcon} disabled={currentPageIndex === 0} onClick={toPrevPage} />
       <IconButton src={chevronRightIcon} disabled={currentPageIndex === lastPageIndex} onClick={toNextPage} />
       <IconButton src={pageLastIcon} disabled={currentPageIndex === lastPageIndex} onClick={toLastPage} />
+      <Select
+        values={pageSizeOptions}
+        selected={pageSize.toString()}
+        reverse
+        onChangeSelected={handleChangePagination}
+      />
     </div>
   {/if}
 </div>
