@@ -1,8 +1,8 @@
 <script lang="ts">
   import _ from 'lodash'
   import { Readable } from 'svelte/store'
-  import checkBoldIcon from './check-bold.svg'
   import CommonCss from './CommonCss.svelte'
+  import checkBoldIcon from './check-bold.svg'
 
   export let checked: boolean = false
   export let value: string | undefined = undefined
@@ -78,12 +78,11 @@
     align-items: center;
     justify-content: center;
 
-    --size: 1em;
+    --size: 1.25rem;
     width: var(--size);
     height: var(--size);
-    border-radius: 0.25em;
     margin: 0;
-    border: 1px solid hsl(0 0% 84%);
+    border: 1.5px solid black;
     background-color: white;
 
     cursor: pointer;

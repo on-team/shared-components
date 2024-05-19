@@ -26,7 +26,7 @@
     --liff_bg_black: hsl(0, 0%, 81%);
 
     /* 複数のコンポーネントで共有する変数 */
-    --one-line-input-height: 2.5em;
+    --one-line-input-height: 3em;
     --modal-backdrop-z-index: 1000;
   }
 </style>

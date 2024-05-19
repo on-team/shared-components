@@ -114,7 +114,7 @@
     border-radius: 100%;
     margin: 0;
 
-    border: hsl(0 0% 60%) 1px solid;
+    border: black 1px solid;
     background-color: white;
 
     cursor: pointer;
@@ -124,6 +124,7 @@
     &:checked {
       transition: all 0.1s ease-out;
       border-color: var(--main_color);
+      background-color: var(--main_color);
 
       .disabled & {
         border-color: hsl(0 0% 70%);
@@ -145,11 +146,11 @@
     }
 
     &:checked::before {
-      --size: 10px;
+      --size: 8px;
       width: var(--size);
       height: var(--size);
 
-      background-color: var(--main_color);
+      background-color: white;
 
       transition: all 0.1s ease-out;
 

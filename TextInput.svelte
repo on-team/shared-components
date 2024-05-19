@@ -4,6 +4,7 @@
   import CommonCss from './CommonCss.svelte'
 
   export let name: string = ''
+  export let id: string = ''
   export let placeholder: string = ''
   export let value: string | number = ''
   export let type: string = 'text'
@@ -19,9 +20,21 @@
 </script>
 
 {#if type === 'email'}
-  <input class="root {klass}" class:disabled type="email" {style} {name} {placeholder} bind:value {disabled} on:input />
+  <input
+    {id}
+    class="root {klass}"
+    class:disabled
+    type="email"
+    {style}
+    {name}
+    {placeholder}
+    bind:value
+    {disabled}
+    on:input
+  />
 {:else if type === 'number'}
   <input
+    {id}
     class="root {klass}"
     class:disabled
     type="number"
@@ -35,6 +48,7 @@
   />
 {:else if type === 'password'}
   <input
+    {id}
     class="root {klass}"
     class:disabled
     type="password"
@@ -48,6 +62,7 @@
   />
 {:else if type === 'search'}
   <input
+    {id}
     class="root {klass}"
     class:disabled
     type="search"
@@ -61,6 +76,7 @@
   />
 {:else if type === 'tel'}
   <input
+    {id}
     class="root {klass}"
     class:disabled
     type="tel"
@@ -74,6 +90,7 @@
   />
 {:else if type === 'text'}
   <input
+    {id}
     class="root {klass}"
     class:disabled
     type="text"
@@ -87,6 +104,7 @@
   />
 {:else if type === 'url'}
   <input
+    {id}
     class="root {klass}"
     class:disabled
     type="url"
@@ -100,6 +118,7 @@
   />
 {:else}
   <input
+    {id}
     class="root {klass}"
     class:disabled
     {style}
@@ -125,11 +144,15 @@
     @apply w-full block rounded-md bg-white;
     height: var(--one-line-input-height);
     padding: 0 0.7em;
-    border: var(--tt_color_light-gray) 1px solid;
+    border: var(--gray_color2) 1px solid;
 
     &:focus {
       @apply outline-none;
       border-color: var(--main_color);
+    }
+
+    &::placeholder {
+      color: var(--gray_color2);
     }
 
     &.disabled {

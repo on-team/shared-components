@@ -51,7 +51,7 @@
     box-sizing: border-box;
 
     padding: 0.7em;
-    border: var(--tt_color_light-gray) 1px solid;
+    border: var(--gray_color2) 1px solid;
     border-radius: 0.3em;
 
     overflow-x: hidden;
